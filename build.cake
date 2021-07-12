@@ -3,7 +3,6 @@
 
 #tool "nuget:?package=GitVersion.CommandLine&version=5.5.0"
 
-
 var gitPath = EnvironmentVariable("TEAMCITY_GIT_PATH") ?? "git";
 
 bool isMaster;
@@ -11,11 +10,12 @@ bool isSupport;
 bool isDevelop;
 bool isFeature;
 
-string automationPath = @"C:\tools\LemonTree.Automation\LemonTree.Automation.exe";
-string projectTransferPath = @"C:\tools\ProjectTransfer\ProjectTransferUM.exe";
+string lemonTreeAutomation = @"C:\tools\LemonTree.Automation\LemonTree.Automation.exe";
+string projectTransfer = @"C:\tools\ProjectTransfer\ProjectTransferUM.exe";
 string modelsPath = @"C:\tools\Models\";
 
-string shortcutEap = modelsPath + "LL_TEST_MASTER.EAP";
+string shortcutToMaster = modelsPath + "LL_TEST_MASTER.EAP";
+string shortcutToDevelop = modelsPath + "LL_TEST_DEVELOP.EAP";
 string localEap = "LL_TEST_LOCAL.eapx";
 
 bool stashedChanges = false;
@@ -53,7 +53,6 @@ Teardown(context =>
 
 		StartProcess(gitPath, "stash push -- \":(exclude)build.cake\"");
 		StartProcess(gitPath, "stash drop");
-
 		StartProcess(gitPath, "stash pop --index");
 	}
 });
@@ -64,7 +63,6 @@ TaskSetup(setupContext =>
    if(TeamCity.IsRunningOnTeamCity)
    {
       TeamCity.WriteStartBuildBlock(setupContext.Task.Description ?? setupContext.Task.Name);
-
       TeamCity.WriteStartProgress(setupContext.Task.Description ?? setupContext.Task.Name);
    }
 });
@@ -74,7 +72,6 @@ TaskTeardown(teardownContext =>
    if(TeamCity.IsRunningOnTeamCity)
    {
       TeamCity.WriteEndProgress(teardownContext.Task.Description ?? teardownContext.Task.Name);
-
       TeamCity.WriteEndBuildBlock(teardownContext.Task.Description ?? teardownContext.Task.Name);
    }
 });
@@ -88,9 +85,7 @@ Task("FetchGit")
 	Information("The git path is " + gitPath);
 
 	StartProcess(gitPath, "reset --hard");
-
 	StartProcess(gitPath, "clean -d -f ./src/");
-
 	StartProcess(gitPath, "config --system lfs.concurrenttransfers 100");
 	StartProcess(gitPath, "fetch --all --tags");
 });
@@ -113,64 +108,75 @@ Task("Default")
 
 	if (isMaster)
 	{
-		
-			//Information(Obfuscar + " -s " + LemonTreeWebObfuscation);
-			if (!FileExists(projectTransferPath))
-			{
-				Error(projectTransferPath + " does not exist");
-			}
-			
-			if (!FileExists(localEap))
-			{
-				Error(localEap + " does not exist");
-			}
-	
-			if (!FileExists(shortcutEap))
-			{
-				Error(shortcutEap + " does not exist");
-			}
-			
-			
-			string arguments = $"--source={localEap} --target={shortcutEap} --loglevel=Debug";
-			Information($"{projectTransferPath} {arguments}");
-			
-			int exitCode = StartProcess(projectTransferPath, new ProcessSettings
-			{
-				Arguments = arguments,
-				RedirectStandardOutput = true,
-				RedirectStandardError = true,
-				RedirectedStandardOutputHandler = (line) => 
-				{
-					if(line != null)
-					{
-						Information(line);
-					}
-
-					return line;
-				},
-				RedirectedStandardErrorHandler = (line) => 
-				{
-					if(line != null)
-					{
-						Error(line);
-					}
-
-					return line;
-				 }		 
-			});
-			Information(projectTransferPath + " exited with code: " + exitCode);
-			
-			if (exitCode != 0)
-			{
-				// lets break the build
-				TeamCity.BuildProblem("projectTransfer failed ");
-				throw new Exception("Build failed. See build log for more information.");
-			}
+		TransferEapToDatabase(localEap, shortcutToMaster);
 	}
+
+	if (isDevelop)
+	{
+		TransferEapToDatabase(localEap, shortcutToDevelop);
+	}	
 	
 	Information("Build Finished");
 });
 
+
+public void TransferEapToDatabase(string source, string target)
+{
+			if (!FileExists(source))
+			{
+				Error(source + " does not exist");
+			}
+	
+			if (!FileExists(target))
+			{
+				Error(target + " does not exist");
+			}
+			
+			string arguments = $"--source={source} --target={target} --loglevel=Debug";
+			int exitCode = ExecuteCommand(projectTransfer, arguments);
+			
+			if (exitCode != 0)
+			{
+				// lets break the build
+				TeamCity.BuildProblem($"{projectTransfer} failed ");
+				throw new Exception("Build failed. See build log for more information.");
+			}	
+}
+
+public int ExecuteCommand(string tool, string arguments)
+{
+		Information($"{tool} {arguments}");
+
+		if (!FileExists(tool))
+		{
+			Error(tool + " does not exist");
+		}		
+		
+		int exitCode = StartProcess(tool, new ProcessSettings
+		{
+			Arguments = arguments,
+			RedirectStandardOutput = true,
+			RedirectStandardError = true,
+			RedirectedStandardOutputHandler = (line) => 
+			{
+				if(line != null)
+				{
+					Information(line);
+				}
+				return line;
+			},
+			RedirectedStandardErrorHandler = (line) => 
+			{
+				if(line != null)
+				{
+					Error(line);
+				}
+				return line;
+			}		 
+		});
+		Information(tool + " exited with code: " + exitCode);	
+		return exitCode;
+}
 
 var target = Argument("target", "Default");
 RunTarget(target);
