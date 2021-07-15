@@ -27,19 +27,12 @@ Setup(context =>
 		Information("Stashing local changes to re-apply them after the build.");
 
 		IEnumerable<string> output;
-		StartProcess(gitPath,
-			new ProcessSettings {
-				Arguments = "status --ignore-submodules --porcelain -- \":(exclude)build.cake\"",
-				RedirectStandardOutput = true
-			},
-			out output);
+		var result = ExecuteGitCommand("status --ignore-submodules --porcelain -- \":(exclude)build.cake\"");
 
-		var processOutput = output.ToList();
-
-		if(processOutput.Count != 0)
+		if(result.Output.Count != 0)
 		{
-			StartProcess(gitPath, "stash push --keep-index --include-untracked -m cake-build-stash -- \":(exclude)build.cake\"");
-			StartProcess(gitPath, "stash apply");
+			ExecuteGitCommand("stash push --keep-index --include-untracked -m cake-build-stash -- \":(exclude)build.cake\"");
+			ExecuteGitCommand("stash apply");
 			stashedChanges = true;
 		}
 	}
@@ -50,10 +43,10 @@ Teardown(context =>
 	if(BuildSystem.IsLocalBuild && stashedChanges)
 	{
 		Information("Recreating working copy state at the start of the build.");
-
-		StartProcess(gitPath, "stash push -- \":(exclude)build.cake\"");
-		StartProcess(gitPath, "stash drop");
-		StartProcess(gitPath, "stash pop --index");
+		
+		ExecuteGitCommand("stash push -- \":(exclude)build.cake\"");
+		ExecuteGitCommand("stash drop");
+		ExecuteGitCommand("stash pop --index");
 	}
 });
 
@@ -84,10 +77,10 @@ Task("FetchGit")
 {
 	Information("The git path is " + gitPath);
 
-	StartProcess(gitPath, "reset --hard");
-	StartProcess(gitPath, "clean -d -f ./src/");
-	StartProcess(gitPath, "config --system lfs.concurrenttransfers 100");
-	StartProcess(gitPath, "fetch --all --tags");
+	ExecuteGitCommand("reset --hard");
+	ExecuteGitCommand("clean -d -f ./src/");
+	ExecuteGitCommand("config --system lfs.concurrenttransfers 100");
+	ExecuteGitCommand("fetch --all --tags");
 });
 
 Task("Default")
@@ -98,13 +91,14 @@ Task("Default")
 	
 	isMaster = gitVersion.BranchName == "main";
 	isSupport = gitVersion.BranchName.StartsWith("support/");
-	isDevelop = !isMaster && !isSupport;
-	isFeature = gitVersion.BranchName.StartsWith("feature/");
+	isFeature = gitVersion.BranchName.StartsWith("feature/") || gitVersion.BranchName == "review";
+	isDevelop = !isMaster && !isSupport && !isFeature;
 	
-	Information("Branchname: " + gitVersion.BranchName);
-	Information("isDevelop: " + isDevelop);
-	Information("isMaster: " + isMaster);
-	Information("isSupport: " + isSupport);		
+	Information($"Branchname: {gitVersion.BranchName}");
+	Information($"isMaster: {isMaster}");
+	Information($"isSupport: {isSupport}");
+	Information($"isFeature: {isFeature}");
+	Information($"isDevelop: {isDevelop}");
 
 	if (isMaster)
 	{
@@ -114,68 +108,142 @@ Task("Default")
 	if (isDevelop)
 	{
 		TransferEapToDatabase(localEap, shortcutToDevelop);
+		//There's no straight-forward way to determine the branch to compare to for an arbitrary branch.
+		//There are some implementations for determining the "parent" branch on stackoverflow, but I'm not sure if that's even the right choice,
+		//and they also need additional tool support (grep) to work.
+		CompareTo("main");
+	}
+
+	if(isFeature)
+	{
+		CompareTo("develop");
 	}	
-	
+
 	Information("Build Finished");
 });
 
 
-public void TransferEapToDatabase(string source, string target)
+public void CompareTo(string branchName)
 {
-			if (!FileExists(source))
-			{
-				Error(source + " does not exist");
-			}
+	// Use LT Automation to compare the latest commit of the current branch to the latest commit of the branch given as a parameter.
+	// The base for the comparison is the merge-base between the branches.
+	var result = ExecuteGitCommand("rev-parse head");
+	var headCommitId = result.Output[0];
+	result = ExecuteGitCommand($"rev-parse {branchName}");
+	var targetBranchCommitId = result.Output[0];
+	result = ExecuteGitCommand($"merge-base {headCommitId} {targetBranchCommitId}");
+	var mergeBaseCommitId = result.Output[0];
 	
-			if (!FileExists(target))
-			{
-				Error(target + " does not exist");
-			}
-			
-			string arguments = $"--source={source} --target={target} --loglevel=Debug";
-			int exitCode = ExecuteCommand(projectTransfer, arguments);
-			
-			if (exitCode != 0)
-			{
-				// lets break the build
-				TeamCity.BuildProblem($"{projectTransfer} failed ");
-				throw new Exception("Build failed. See build log for more information.");
-			}	
+	Information($"Head commit id: {headCommitId}");
+	Information($"{branchName} commit id: {headCommitId}");
+	Information($"MergeBase commit id: {mergeBaseCommitId}");
+
+	string headPath = $"automation/head.eap";
+	string targetBranchPath = $"automation/targetBranch.eap";
+	string mergeBasePath = $"automation/mergeBase.eap";
+
+	EnsureDirectoryExists("automation");
+
+	ExtractFileVersion(headCommitId, headPath);
+	ExtractFileVersion(targetBranchCommitId, targetBranchPath);
+	ExtractFileVersion(mergeBaseCommitId, mergeBasePath);
+
+	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap");
+
+	if(result.ExitCode == 3)
+	{
+		Information($"LemonTree Automation has detected a conflict between the current branch and branch {branchName}.");
+	}
 }
 
-public int ExecuteCommand(string tool, string arguments)
+public void ExtractFileVersion(string commitId, string targetPath)
 {
-		Information($"{tool} {arguments}");
+	//Git Restore replaces the version of the file in the repo with the one in the given commit.
+	ExecuteGitCommand($"restore -s {commitId} -- {localEap}");
 
-		if (!FileExists(tool))
-		{
-			Error(tool + " does not exist");
-		}		
+	if(FileExists(targetPath))
+	{
+		Information($"Deleting old version of {targetPath}");
+		DeleteFile(targetPath);
+	}
+	CopyFile(localEap, targetPath);
+	
+}
+
+
+public void TransferEapToDatabase(string source, string target)
+{
+	if (!FileExists(source))
+	{
+		Error(source + " does not exist");
+	}
+	
+	if (!FileExists(target))
+	{
+		Error(target + " does not exist");
+	}
+			
+	string arguments = $"--source={source} --target={target} --loglevel=Debug";
+	var result = ExecuteCommand(projectTransfer, arguments);
+			
+	if (result.ExitCode != 0)
+	{
+		// lets break the build
+		TeamCity.BuildProblem($"{projectTransfer} failed ");
+		throw new Exception("Build failed. See build log for more information.");
+	}	
+}
+
+public CommandResult ExecuteGitCommand(string arguments)
+{
+	return ExecuteCommand(gitPath, arguments);
+}
+
+public CommandResult ExecuteCommand(string tool, string arguments)
+{
+	var commandResult = new CommandResult();
+
+	Information($"{tool} {arguments}");
 		
-		int exitCode = StartProcess(tool, new ProcessSettings
+	int exitCode = StartProcess(tool, new ProcessSettings
+	{
+		Arguments = arguments,
+		RedirectStandardOutput = true,
+		RedirectStandardError = true,
+		RedirectedStandardOutputHandler = (line) => 
 		{
-			Arguments = arguments,
-			RedirectStandardOutput = true,
-			RedirectStandardError = true,
-			RedirectedStandardOutputHandler = (line) => 
+			if(line != null)
 			{
-				if(line != null)
-				{
-					Information(line);
-				}
-				return line;
-			},
-			RedirectedStandardErrorHandler = (line) => 
+				Information(line);
+				commandResult.Output.Add(line);
+			}
+			return line;
+		},
+		RedirectedStandardErrorHandler = (line) => 
+		{
+			if(line != null)
 			{
-				if(line != null)
-				{
-					Error(line);
-				}
-				return line;
-			}		 
-		});
-		Information(tool + " exited with code: " + exitCode);	
-		return exitCode;
+				Error(line);
+				commandResult.Errors.Add(line);
+			}
+			return line;
+		}		 
+	});
+	Information(tool + " exited with code: " + exitCode);	
+	commandResult.ExitCode = exitCode;
+	return commandResult;
+}
+
+public class CommandResult
+{
+	public int ExitCode { get; set; }
+	public List<string> Output { get; private set; }
+	public List<string> Errors { get; private set; }
+
+	public CommandResult(){
+		Output = new List<string>();
+		Errors = new List<string>();
+	}
 }
 
 var target = Argument("target", "Default");
