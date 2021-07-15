@@ -144,9 +144,12 @@ public void CompareTo(string branchName)
 
 	EnsureDirectoryExists("automation");
 
-	ExtractFileVersion(headCommitId, headPath);
+	//The order of checkouts is important here.
+	//Since this manipulates the file in the repo, doing it for the file which is supposed to be there 
+	//sets it back to how it was supposed to be.
 	ExtractFileVersion(targetBranchCommitId, targetBranchPath);
 	ExtractFileVersion(mergeBaseCommitId, mergeBasePath);
+	ExtractFileVersion(headCommitId, headPath);
 
 	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap");
 
