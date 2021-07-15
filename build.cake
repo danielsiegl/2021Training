@@ -9,14 +9,19 @@ bool isMaster;
 bool isSupport;
 bool isDevelop;
 bool isFeature;
+bool isComponentsFeature;
 
 string lemonTreeAutomation = @"C:\tools\LemonTree.Automation\LemonTree.Automation.exe";
 string projectTransfer = @"C:\tools\ProjectTransfer\ProjectTransferUM.exe";
+string packagerPath = @"C:\tools\LemonTree.Packager.CLI_3.1.1-lee-xxxx-nw-pack0051\LemonTree.Packager.CLI.exe";
 string modelsPath = @"C:\tools\Models\";
 
 string shortcutToMaster = modelsPath + "LL_TEST_MASTER.EAP";
 string shortcutToDevelop = modelsPath + "LL_TEST_DEVELOP.EAP";
+string shortcutToComponents = modelsPath + "LL_TEST_COMPONENTS.EAP";
+
 string localEap = "LL_TEST_LOCAL.eapx";
+string components = @"\Components\*.mpms";
 
 bool stashedChanges = false;
 
@@ -92,13 +97,17 @@ Task("Default")
 	isMaster = gitVersion.BranchName == "main";
 	isSupport = gitVersion.BranchName.StartsWith("support/");
 	isFeature = gitVersion.BranchName.StartsWith("feature/") || gitVersion.BranchName == "review";
+	isComponentsFeature = gitVersion.BranchName.StartsWith("feature/PackagerIntegration");
 	isDevelop = !isMaster && !isSupport && !isFeature;
 	
 	Information($"Branchname: {gitVersion.BranchName}");
 	Information($"isMaster: {isMaster}");
 	Information($"isSupport: {isSupport}");
-	Information($"isFeature: {isFeature}");
 	Information($"isDevelop: {isDevelop}");
+	Information("isFeature: "+ isFeature);
+	Information("isComponentsFeature: "+isComponentsFeature);
+	Information("isFeature: "+ isFeature);
+	Information("isComponentsFeature: "+isComponentsFeature);
 
 	if (isMaster)
 	{
@@ -119,6 +128,11 @@ Task("Default")
 		CompareTo("develop");
 	}	
 
+	if (isComponentsFeature)
+	{
+		PublishComponents(components,shortcutToComponents);
+	}
+	
 	Information("Build Finished");
 });
 
@@ -174,27 +188,51 @@ public void ExtractFileVersion(string commitId, string targetPath)
 }
 
 
+public void PublishComponents(string source, string target)
+{
+			//Can be also a pattern so this makes no sense
+			//if (!FileExists(source))
+			//{
+			//	Error(source + " does not exist");
+			//}
+	
+			if (!FileExists(target))
+			{
+				Error(target + " does not exist");
+			}
+			
+			string arguments = $" install -i {source} -o {target}";
+			int exitCode = ExecuteCommand(packagerPath, arguments).ExitCode;
+			
+			if (exitCode != 0)
+			{
+				// lets break the build
+				TeamCity.BuildProblem($"{packagerPath} failed ");
+				throw new Exception("Build failed. See build log for more information.");
+			}	
+}
+
 public void TransferEapToDatabase(string source, string target)
 {
-	if (!FileExists(source))
-	{
-		Error(source + " does not exist");
-	}
+			if (!FileExists(source))
+			{
+				Error(source + " does not exist");
+			}
 	
-	if (!FileExists(target))
-	{
-		Error(target + " does not exist");
-	}
+			if (!FileExists(target))
+			{
+				Error(target + " does not exist");
+			}
 			
-	string arguments = $"--source={source} --target={target} --loglevel=Debug";
+			string arguments = $"--source={source} --target={target} --loglevel=Debug";
 	var result = ExecuteCommand(projectTransfer, arguments);
 			
 	if (result.ExitCode != 0)
-	{
-		// lets break the build
-		TeamCity.BuildProblem($"{projectTransfer} failed ");
-		throw new Exception("Build failed. See build log for more information.");
-	}	
+			{
+				// lets break the build
+				TeamCity.BuildProblem($"{projectTransfer} failed ");
+				throw new Exception("Build failed. See build log for more information.");
+			}	
 }
 
 public CommandResult ExecuteGitCommand(string arguments)
@@ -206,33 +244,33 @@ public CommandResult ExecuteCommand(string tool, string arguments)
 {
 	var commandResult = new CommandResult();
 
-	Information($"{tool} {arguments}");
+		Information($"{tool} {arguments}");
 		
-	int exitCode = StartProcess(tool, new ProcessSettings
-	{
-		Arguments = arguments,
-		RedirectStandardOutput = true,
-		RedirectStandardError = true,
-		RedirectedStandardOutputHandler = (line) => 
+		int exitCode = StartProcess(tool, new ProcessSettings
 		{
-			if(line != null)
+			Arguments = arguments,
+			RedirectStandardOutput = true,
+			RedirectStandardError = true,
+			RedirectedStandardOutputHandler = (line) => 
 			{
-				Information(line);
+				if(line != null)
+				{
+					Information(line);
 				commandResult.Output.Add(line);
-			}
-			return line;
-		},
-		RedirectedStandardErrorHandler = (line) => 
-		{
-			if(line != null)
+				}
+				return line;
+			},
+			RedirectedStandardErrorHandler = (line) => 
 			{
-				Error(line);
+				if(line != null)
+				{
+					Error(line);
 				commandResult.Errors.Add(line);
-			}
-			return line;
-		}		 
-	});
-	Information(tool + " exited with code: " + exitCode);	
+				}
+				return line;
+			}		 
+		});
+		Information(tool + " exited with code: " + exitCode);	
 	commandResult.ExitCode = exitCode;
 	return commandResult;
 }
