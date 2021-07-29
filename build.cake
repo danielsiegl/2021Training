@@ -170,6 +170,8 @@ public void CompareTo(string branchName)
 	if(result.ExitCode == 3)
 	{
 		Information($"LemonTree Automation has detected a conflict between the current branch and branch {branchName}.");
+		TeamCity.BuildProblem("Conflict in file LL_TEST_LOCAL.eapx detected.");
+		throw new Exception("Conflict in file LL_TEST_LOCAL.eapx detected.");
 	}
 }
 
