@@ -20,7 +20,7 @@ string shortcutToMaster = modelsPath + "LL_TEST_MASTER.EAP";
 string shortcutToDevelop = modelsPath + "LL_TEST_DEVELOP.EAP";
 string shortcutToComponents = modelsPath + "LL_TEST_COMPONENTS.EAP";
 
-string localEap = "LL_TEST_LOCAL.eapx";
+string localEap = "PWC.eapx";
 string components = @"\Components\*.mpms";
 
 bool stashedChanges = false;
@@ -170,8 +170,8 @@ public void CompareTo(string branchName)
 	if(result.ExitCode == 3)
 	{
 		Information($"LemonTree Automation has detected a conflict between the current branch and branch {branchName}.");
-		TeamCity.BuildProblem("Conflict in file LL_TEST_LOCAL.eapx detected.");
-		throw new Exception("Conflict in file LL_TEST_LOCAL.eapx detected.");
+		TeamCity.BuildProblem("Conflict in file PWC.eapx detected.");
+		throw new Exception("Conflict in file PWC.eapx detected.");
 	}
 }
 
