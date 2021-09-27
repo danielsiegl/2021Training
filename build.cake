@@ -102,6 +102,7 @@ Task("Build")
 });
 
 Task("Unittests")
+	.IsDependentOn("Automation")	
 	.IsDependentOn("Build")
 	.Does(() =>
 {
@@ -130,9 +131,9 @@ Task("Unittests")
 	}
 });
 
-Task("Default")
-	.IsDependentOn("Unittests")	
-	.Does(() =>
+Task("Automation")
+.IsDependentOn("Build")
+.Does(()=>
 {
 	var gitVersion = GitVersion(new GitVersionSettings());
 	
@@ -174,6 +175,14 @@ Task("Default")
 	{
 		PublishComponents(components,shortcutToComponents);
 	}
+}
+);
+
+Task("Default")
+	.IsDependentOn("Unittests")	
+	.Does(() =>
+{
+	
 	
 	if(TeamCity.IsRunningOnTeamCity)
 	{
@@ -213,7 +222,7 @@ public void CompareTo(string branchName)
 	ExtractFileVersion(mergeBaseCommitId, mergeBasePath);
 	ExtractFileVersion(headCommitId, headPath);
 
-		result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs automation/{branchName}.ltsfs");
+	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs automation/{branchName}.ltsfs");
 
 	if(result.ExitCode == 3)
 	{
