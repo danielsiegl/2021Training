@@ -2,6 +2,8 @@
 #addin "Cake.FileHelpers&version=4.0.1"
 
 #tool "nuget:?package=GitVersion.CommandLine&version=5.5.0"
+#tool "nuget:?package=NUnit.ConsoleRunner&version=3.12.0"
+#tool "nuget:?package=NUnit.Extension.TeamCityEventListener&version=1.0.7"
 
 var gitPath = EnvironmentVariable("TEAMCITY_GIT_PATH") ?? "git";
 
@@ -15,6 +17,7 @@ string lemonTreeAutomation = @"C:\tools\LemonTree.Automation\LemonTree.Automatio
 string projectTransfer = @"C:\tools\ProjectTransfer\ProjectTransferUM.exe";
 string packagerPath = @"C:\tools\LemonTree.Packager.CLI_3.1.4-lee-xxxx-nw-pack0004\LemonTree.Packager.CLI.exe";
 string modelsPath = @"C:\tools\Models\";
+string solution = @"src/ModelMetric.sln";
 
 string shortcutToMaster = modelsPath + "LL_TEST_MASTER.EAP";
 string shortcutToDevelop = modelsPath + "LL_TEST_DEVELOP.EAP";
@@ -31,7 +34,6 @@ Setup(context =>
 	{
 		Information("Stashing local changes to re-apply them after the build.");
 
-		IEnumerable<string> output;
 		var result = ExecuteGitCommand("status --ignore-submodules --porcelain -- \":(exclude)build.cake\"");
 
 		if(result.Output.Count != 0)
@@ -57,7 +59,6 @@ Teardown(context =>
 
 TaskSetup(setupContext =>
 {
-	// use setupContext.Data.Get<BuildData>() to get to the build data, this could be used for logging
    if(TeamCity.IsRunningOnTeamCity)
    {
       TeamCity.WriteStartBuildBlock(setupContext.Task.Description ?? setupContext.Task.Name);
@@ -88,8 +89,41 @@ Task("FetchGit")
 	ExecuteGitCommand("fetch --all --tags");
 });
 
-Task("Default")
+Task("Build")
 	.IsDependentOn("FetchGit")
+	.Does(() =>
+{
+	MSBuild(solution, new MSBuildSettings {
+    ToolVersion = MSBuildToolVersion.VS2019,
+    Configuration = "Release",
+    PlatformTarget = PlatformTarget.x86,
+	 Restore = true
+    });
+});
+
+Task("Unittests")
+	.IsDependentOn("Build")
+	.Does(() =>
+{
+	var nunitSettings = new NUnit3Settings() 
+	{
+		SkipNonTestAssemblies = true,
+		TeamCity = true,
+		X86 = true,
+		Results = new [] { new NUnit3Result { FileName = "./nunit.tcr" } },
+		Agents = 1
+	};
+	
+	NUnit3("./src/**/bin/**/*.Test.dll", nunitSettings);
+	
+	if(TeamCity.IsRunningOnTeamCity)
+	{
+		TeamCity.ImportData("nunit", "./nunit.tcr");
+	}
+});
+
+Task("Default")
+	.IsDependentOn("Unittests")	
 	.Does(() =>
 {
 	var gitVersion = GitVersion(new GitVersionSettings());

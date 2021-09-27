@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{10CD863C-15BA-4671-936D-D558EF4E2C7A}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cake = ..\build.cake
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelMetric.Test", "ModelMetric\ModelMetric.Test.csproj", "{9BD73F25-47AE-440A-9A9F-DE879358ABBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BD73F25-47AE-440A-9A9F-DE879358ABBD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9BD73F25-47AE-440A-9A9F-DE879358ABBD}.Debug|x86.ActiveCfg = Debug|x86
+		{9BD73F25-47AE-440A-9A9F-DE879358ABBD}.Debug|x86.Build.0 = Debug|x86
+		{9BD73F25-47AE-440A-9A9F-DE879358ABBD}.Release|Any CPU.ActiveCfg = Release|x86
+		{9BD73F25-47AE-440A-9A9F-DE879358ABBD}.Release|x86.ActiveCfg = Release|x86
+		{9BD73F25-47AE-440A-9A9F-DE879358ABBD}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D83E895B-0EC8-4084-95D6-D79029A3943E}
+	EndGlobalSection
+EndGlobal
