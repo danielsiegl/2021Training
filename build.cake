@@ -213,7 +213,7 @@ public void CompareTo(string branchName)
 	ExtractFileVersion(mergeBaseCommitId, mergeBasePath);
 	ExtractFileVersion(headCommitId, headPath);
 
-	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap");
+		result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs automation/{branchName}.ltsfs");
 
 	if(result.ExitCode == 3)
 	{
