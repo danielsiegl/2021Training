@@ -184,11 +184,11 @@ Task("Default")
 {
 	
 	
-	if(TeamCity.IsRunningOnTeamCity)
-	{
-		Information("Publish pretty report.");		
-		TeamCity.PublishArtifacts("./PrettyReport.html");
-	}
+	/**if(TeamCity.IsRunningOnTeamCity)
+	'{
+	'	Information("Publish pretty report.");		
+	'	TeamCity.PublishArtifacts("./PrettyReport.html");
+	'}**/
 	
 	Information("Build Finished");
 });
