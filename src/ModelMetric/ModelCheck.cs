@@ -22,22 +22,41 @@ namespace ModelMetric.Test
 				var sql = command;
 				using (var cmd = new OleDbCommand { CommandText = sql, Connection = cn })
 				{
+					/*
+						<Title> 7 Actions have more than one incoming Control Flow</Title>
+						<Description> Generate turnLeftCommand</Description >
+						<Guid>{1E1129F9-AE37-449c-88AD-B6337778601B}</Guid >
+						<EAFile>ea://PowerWindowController.eapx/%7bA2A184EF-3039-4091-B84E-E45CB26B9DC4%7d</EAFile>
+						<EAWeb><![CDATA[https://test.lieberlieber.com/webea?m=1&o=1E1129F9-AE37-449c-88AD-B6337778601B]]>
+					*/
+
 					cn.Open();
 					dataTable.Load(cmd.ExecuteReader());
 					result.RecordCount = dataTable.Rows.Count;
+					result.ResultText.AppendLine("<ul>");
 					foreach (DataRow row in dataTable.Rows)
 					{
+						result.ResultText.AppendLine("<li>");
 						string output = row[0].ToString();
-						result.ResultText.AppendLine(output + " " + row[1].ToString());
+						result.ResultText.AppendLine("<span>" + output + " " + row[1].ToString() + "</span>");
 						string strippedGuid = output.Replace("{", "").Replace("}", "");
-						result.ResultText.AppendLine(string.Format(Properties.Settings.Default.WebEAURL, strippedGuid));
-						string linkToEa = string.Format(Properties.Settings.Default.LocalEAUrl, strippedGuid);
-						//result.ResultText.AppendLine($"<a href=\"https://{linkToEa}\">{linkToEa}</a>");
-						result.ResultText.AppendLine(linkToEa);
+
+						result.ResultText.AppendLine("<ul><li>");
+						string linkToWeb = $"<a href='{string.Format(Properties.Settings.Default.WebEAURL, strippedGuid)}'>Link To Web</a>";
+						result.ResultText.AppendLine(linkToWeb + "</li>");
+
+						string linkToEa = "<li>" + $"<a href='{string.Format(Properties.Settings.Default.EALink, strippedGuid)}'>Link To EA</a>";
+						result.ResultText.AppendLine(linkToEa + "</li>");
+						result.ResultText.AppendLine("</ul>");
 						//ea://RegTest_cb_20.11+VORLAGE_155.eapx/%7b{0}%7d
+
 						Console.WriteLine(output);
 						Debug.WriteLine(output);
+
+						result.ResultText.AppendLine("</li>");
 					}
+					result.ResultText.AppendLine("</ul>");
+
 				}
 			}
 
@@ -73,7 +92,7 @@ namespace ModelMetric.Test
 			else
 			{
 				var sb = new System.Text.StringBuilder();
-				sb.AppendLine($"{testReturn.RecordCount} Requirements are NOT connected with Realization OR trace to other elements");
+				sb.AppendLine($"<br><b>{testReturn.RecordCount} Requirements are NOT connected with Realization OR trace to other elements</b>");
 				sb.Append(testReturn.ResultText);
 
 				Assert.Fail(sb.ToString());
@@ -91,10 +110,10 @@ namespace ModelMetric.Test
 			else
 			{
 				var sb = new System.Text.StringBuilder();
-				sb.AppendLine($"{testReturn.RecordCount} duplicate names occurred in the packages");
+				sb.AppendLine($"<br><b>{testReturn.RecordCount} duplicate names occurred in the packages</b>");
 				sb.Append(testReturn.ResultText);
 
-				Assert.Fail(sb.ToString());
+				Assert.Warn(sb.ToString());
 			}
 		}
 
@@ -109,7 +128,7 @@ namespace ModelMetric.Test
 			else
 			{
 				var sb = new System.Text.StringBuilder();
-				sb.AppendLine($"{testReturn.RecordCount} Actions have more than one incoming Control Flow");
+				sb.AppendLine($"<br><b>{testReturn.RecordCount} Actions have more than one incoming Control Flow</b>");
 				sb.Append(testReturn.ResultText);
 
 				Assert.Fail(sb.ToString());

@@ -108,5 +108,17 @@ namespace ModelMetric.Test.Properties {
                 this["LocalEAUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ea://PWC.eapx/%7b{0}%7d")]
+        public string EALink {
+            get {
+                return ((string)(this["EALink"]));
+            }
+            set {
+                this["EALink"] = value;
+            }
+        }
     }
 }

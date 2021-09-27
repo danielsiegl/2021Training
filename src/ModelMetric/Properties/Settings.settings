@@ -23,5 +23,8 @@
     <Setting Name="LocalEAUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://customers.lieberlieber.com/openinea/?eaguid={0}</Value>
     </Setting>
+    <Setting Name="EALink" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ea://PWC.eapx/%7b{0}%7d</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

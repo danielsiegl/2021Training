@@ -110,7 +110,15 @@ Task("Unittests")
 		SkipNonTestAssemblies = true,
 		TeamCity = true,
 		X86 = true,
-		Results = new [] { new NUnit3Result { FileName = "./nunit.tcr" } },
+		Results = new [] 
+		{ 
+			new NUnit3Result { FileName = "./nunit.tcr" },
+			new NUnit3Result 
+				{ 
+					FileName = "./PrettyReport.html", 
+					Transform = "./nunit3-xunit.xslt"
+				} 
+		},
 		Agents = 1
 	};
 	
@@ -165,6 +173,12 @@ Task("Default")
 	if (isComponentsFeature)
 	{
 		PublishComponents(components,shortcutToComponents);
+	}
+	
+	if(TeamCity.IsRunningOnTeamCity)
+	{
+		Information("Publish pretty report.");		
+		TeamCity.PublishArtifacts("./PrettyReport.html");
 	}
 	
 	Information("Build Finished");
