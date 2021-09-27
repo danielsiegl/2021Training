@@ -1,17 +1,17 @@
 ﻿//version: 3 (UM: 10.0.6.0)
-//{"ReadOnly":false,"Name":"PWC_SystemContext","Guid":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","Description":"","Authors":"","Owners":"","ReleaseNotes":"","Copyright":"","Tags":"","Version":"A","Status":1,"Dependencies":[{"name":"PWC_DomainModel","source":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","target":"{09cbc237-5aa0-2b0f-f18f-50f5c2a3561a}","versionConstraint":"*","dependencyClass":0},{"name":"PWC_KnowledgeModel","source":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","target":"{e6184f77-94fd-72e5-58b6-287139ebeded}","versionConstraint":"*","dependencyClass":0},{"name":"PWC_UseCases","source":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","target":"{37f0ae88-6f82-3e24-ef99-7073b90b1894}","versionConstraint":"*","dependencyClass":0}],"ModelPackageInfo":"{A4C1B087-37E5-4ae0-B421-3FF2A161CB71}:5669f1593e7cfca236b0f8c46b299bf17a7ff8857af69e863459bafe73af779b"}
+//{"ReadOnly":false,"Name":"PWC_SystemContext","Guid":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","Description":"","Authors":"","Owners":"","ReleaseNotes":"","Copyright":"","Tags":"","Version":"A","Status":1,"Dependencies":[{"name":"PWC_DomainModel","source":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","target":"{09cbc237-5aa0-2b0f-f18f-50f5c2a3561a}","versionConstraint":"*","dependencyClass":0},{"name":"PWC_KnowledgeModel","source":"{48ac4b17-1fb8-e452-081e-386c0822ea7b}","target":"{e6184f77-94fd-72e5-58b6-287139ebeded}","versionConstraint":"*","dependencyClass":0}],"ModelPackageInfo":"{A4C1B087-37E5-4ae0-B421-3FF2A161CB71}:67e0a7fc87d3b38dd70d282edb6df86ca1a48854ad17821980c6149222cbc821"}
 //format: Raw
 {
  "version": "10.0.6.0",
  "objects": [
   {
-   "oid": "VthAvvybbRw1ImmsgskjQVbfDWEg26iAM9YtAVKHdy0=",
+   "oid": "InunyPQFggXDU5DS8G7wwaM6BdK7QXXSIotphWZhq24=",
    "id": "{8dd091f6-1c05-4faa-2c24-93df7cc3ec8d}",
    "meta": [],
    "prop": [],
    "sub": [
+    "BKCYTWQkSSHMfnNF12/FCqhjErdg+KM86+MybKKz/Qc=",
     "FX5bypMh4Agq16ApOw/I4OOI5/wa97tkHwyBbuRj0Ys=",
-    "shhB1jNG06HtXeyE74rTQ8tC+CbAyR6l9deLc76P2mY=",
     "19C5vrH3L39RvKY3SRqMcAJrVJvrK10Qf31JQRv2/AY="]},
   {
    "oid": "19C5vrH3L39RvKY3SRqMcAJrVJvrK10Qf31JQRv2/AY=",
@@ -64,7 +64,7 @@
     "vAfSmhBfTvNMvqMswFymfWuw4wg+CZ0OtD0YYLn1e6I=",
     "7YtMOnT3xwnFYVETTetesI7/mPD5IMJfvDN4Vt1bAZ0="]},
   {
-   "oid": "shhB1jNG06HtXeyE74rTQ8tC+CbAyR6l9deLc76P2mY=",
+   "oid": "BKCYTWQkSSHMfnNF12/FCqhjErdg+KM86+MybKKz/Qc=",
    "id": "{EA1D0A51-F03B-4840-ACBA-B41F592304EE}",
    "meta": [
     ["+UT","Model"]],
@@ -76,8 +76,8 @@
     ["+M","+V","Public"]],
    "parent": "{8dd091f6-1c05-4faa-2c24-93df7cc3ec8d}",
    "sub": [
-    "OfpzbbrcaojVi+Hjd99df1PAG1QGVUwm7PZ2mXXYGLw=",
-    "nIpEAr0E+eO1GBDkc1ULg1S1aMHmO1pn/gsjHvcGMwA="]},
+    "Htmbn4btKetKHZcvLa0DKV9TTeKg5Z8AB7yZhv1PCks=",
+    "gjgozgb9bIK99eothCA07pmKDidC3wkAIxXPJe73fxw="]},
   {
    "oid": "9lXphllDNwPhjhNJVNJc9CKHVH05vSOHBnzL3JZ0gwU=",
    "id": "{SysML1.4::InterfaceBlock}",
@@ -317,7 +317,7 @@
    "sub": [
     "yIEahJ3Nw/zbOHiVKEj/sH7mo2v5DqIS+Hm/RhhOQYE="]},
   {
-   "oid": "nIpEAr0E+eO1GBDkc1ULg1S1aMHmO1pn/gsjHvcGMwA=",
+   "oid": "gjgozgb9bIK99eothCA07pmKDidC3wkAIxXPJe73fxw=",
    "id": "{A4C1B087-37E5-4ae0-B421-3FF2A161CB71}",
    "meta": [
     ["+ET","t_package"],
@@ -347,14 +347,14 @@
    "parent": "{EA1D0A51-F03B-4840-ACBA-B41F592304EE}",
    "sub": [
     "H2BQKxobnA1E/kUDHMKGk+DODZdcpebCaZx3a/679vM=",
-    "Lku0ej7Wa02bKboodLFYSRJkgZHQumrnke2uNCLIUJc=",
     "NzS7y4Xd6SWf5IY4bxfngCZ/eVLXgqOH+Yjj8GbkXxM=",
     "OD4drskSpDg8Wx+Lq3ntAPj1Sy8V0DelFhb5+UhtckA=",
     "ZEWQ5uHz/9A652K1Hir18JrECdv9fBIPjmA//jz2Pd0=",
+    "ZzmGwbE7x2/6cg+YMihAl5I1rix0VM673dhhG+6KF+c=",
     "mvYAXheZTD+WUFxHarXjieGyGijtuC65hl0RIC4pF9w=",
     "vhwxhFdNaDkxjYhubKM6bn/gJz5KtlQYXBcbx0KtvuM="]},
   {
-   "oid": "OfpzbbrcaojVi+Hjd99df1PAG1QGVUwm7PZ2mXXYGLw=",
+   "oid": "Htmbn4btKetKHZcvLa0DKV9TTeKg5Z8AB7yZhv1PCks=",
    "id": "{fa766633-9ab6-e55c-969c-2aef00ab540d}",
    "meta": [
     ["+ET","t_package"],
@@ -391,10 +391,9 @@
     ["{mpms spec+package}","PrimaryStereotype",16],
     ["{mpms spec+package}","Stereotype",8]],
    "sub": [
-    "UwG2bjK9Wxyk+BNICTldrTjGexTjm7frcINahZ9OjII=",
     "fcX0FR2B7D/szq/SPudiupoB3Or2Gu8XiQXkeDq46AU=",
+    "s3qDcuem7mVh5TGZTyNxaGBMAygWrETYwpK5Hd2szTE=",
     "xYH8/7fznTQIAjgoKEXfruqf6dlTPqYqoJConJqKsrM=",
-    "1roUIECH0L4RIm4wjHtogW04CvHEpy/Q2v7JK4PyafY=",
     "7UMzySGodf1nZVlKF01VqdruKo2wqqCTENkPQMLbedk="]},
   {
    "oid": "gVUUyxMDAh+stpItVvXLYkrwqQHmteRaJQDSt7edADE=",
@@ -815,7 +814,7 @@
     "TQumvAkGjrhJJFPiAUM6piu3Oxg1dwEEns1oGTbU+2I=",
     "fR0XpzADt3Cq15p1PHApVzQSjlO77XgZhmGH/tBlZpU="]},
   {
-   "oid": "Lku0ej7Wa02bKboodLFYSRJkgZHQumrnke2uNCLIUJc=",
+   "oid": "ZzmGwbE7x2/6cg+YMihAl5I1rix0VM673dhhG+6KF+c=",
    "id": "{AC1DB36D-F89B-4d39-AECA-B80AB03C2C6E}",
    "meta": [
     ["Diagram_Type","Logical"],
@@ -847,7 +846,7 @@
     ["EA Specifics 1.0::Swimlanes","locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;hh=0;cls=0;bw=0;hli=0;bro=0;"],
     ["EA Specifics 1.0::Version","1.0"],
     ["Element Metadata 1.0::CreatedDate","2021-08-01T17:34:42Z"],
-    ["Element Metadata 1.0::ModifiedDate","2021-08-18T17:53:10Z"]],
+    ["Element Metadata 1.0::ModifiedDate","2021-08-18T17:55:49Z"]],
    "parent": "{A4C1B087-37E5-4ae0-B421-3FF2A161CB71}",
    "sub": [
     "DlwbX1/OmRRD6BxNLOTKeNU/0/rWc57DTCza3Sulq5M=",
@@ -1083,7 +1082,7 @@
     "gFYF/LaJhQcrtx+OE6vmsgDTQqULR6AG8z9DTTYnNV8=",
     "7Qw07OBGt6r+k4k7WniyfraKLssdWcgapWe1pj+F6qg="]},
   {
-   "oid": "1roUIECH0L4RIm4wjHtogW04CvHEpy/Q2v7JK4PyafY=",
+   "oid": "s3qDcuem7mVh5TGZTyNxaGBMAygWrETYwpK5Hd2szTE=",
    "id": "{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}",
    "meta": [
     ["+ET","t_object"],
@@ -1131,59 +1130,11 @@
     "j9CinCs2jm8/n6Wox2T7eLH/7RyteKSqLL7/wFPUwz4=",
     "k7JAnQ89xUyJURCiaIRfG7eD87tZiTclQUB0giQh1V0=",
     "nXbQbU3xnOr2D1JhSWWi/RK0TqES5PeL7/RupWhcLGw=",
+    "oSwYlt7hed+e67YdQF5LNLNnAFZDposFTSr1UiU2swg=",
     "qfbVnOxa7yRb0JhwH638MeznpM334sMrdXIptbHjrmg=",
     "sxyNOZAjgLVdLn+6RcxxvwAeTgAhxl5N2xHRGgdUZHo=",
     "t7zPZcchZzAW+rKUB7phqcdd9sp/4JPxqeYQKsBKgUg=",
-    "2DUkNcAfpDSObvYHhjLSaRkHyRIK8gnrLU/CAG97lqg=",
-    "+I6HfMzrzFElCrasWB7B5gQIwXO8JE8xayS1WQaHdus="]},
-  {
-   "oid": "UwG2bjK9Wxyk+BNICTldrTjGexTjm7frcINahZ9OjII=",
-   "id": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}",
-   "meta": [
-    ["+ET","t_object"],
-    ["+EY","Class"],
-    ["+NT","0"],
-    ["+OT","Class"],
-    ["+ST","MPMS Dependency"],
-    ["+UT","Class"]],
-   "prop": [
-    ["+X","+A",""],
-    ["+M","+D",""],
-    ["+X","+CD?","false"],
-    ["+M","+ABS?","false"],
-    ["+M","+ACT?","false"],
-    ["+M","+FS?","false"],
-    ["+M","+N","PWC_UseCases"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::Author",""],
-    ["EA Specifics 1.0::Backcolor","-1"],
-    ["EA Specifics 1.0::BorderStyle","0"],
-    ["EA Specifics 1.0::BorderWidth","-1"],
-    ["EA Specifics 1.0::Bordercolor","-1"],
-    ["EA Specifics 1.0::Complexity",""],
-    ["EA Specifics 1.0::Fontcolor","-1"],
-    ["EA Specifics 1.0::Language",""],
-    ["EA Specifics 1.0::Phase","1.0"],
-    ["EA Specifics 1.0::Pos","0"],
-    ["EA Specifics 1.0::Status",""],
-    ["EA Specifics 1.0::StereotypeString","MPMS Dependency"],
-    ["EA Specifics 1.0::Style",""],
-    ["EA Specifics 1.0::StyleEx",""],
-    ["EA Specifics 1.0::Version","1.0"],
-    ["Element Metadata 1.0::CreatedDate","2021-08-18T17:50:36Z"],
-    ["Element Metadata 1.0::ModifiedDate","2021-08-18T17:50:36Z"]],
-   "parent": "{fa766633-9ab6-e55c-969c-2aef00ab540d}",
-   "ref": [
-    ["{mpms dependency+class}","PrimaryStereotype",16],
-    ["{mpms dependency+class}","Stereotype",8]],
-   "sub": [
-    "H4ouLxXeIyig94i0uONtsRaACiYnqD5NuxEZHbQ4T8w=",
-    "KSk/QSk+neSZjpC2rxkYd9sJk2lbCknQqFBwwnbxZ/M=",
-    "MTgUqqqqzyDJv4Eu5SkdaHaeDuD0u7DIp+sJyoOkP2A=",
-    "19QlaL009if9yC5kvb/6MsTjiRFfu/4qgrugzeo0hKo=",
-    "2j4n+QQkyTQrPGm4ekoYxc19kOQ3QviQL28ARwFtDlo=",
-    "+Bb2wItFEnHrx/FIu080GsAZaqn+fiCd0khq/BeUlN0="]},
+    "2DUkNcAfpDSObvYHhjLSaRkHyRIK8gnrLU/CAG97lqg="]},
   {
    "oid": "9lK7mwcDFYvaMx+hIIp+VMVaPN3lPdvOpPo12sFCWaE=",
    "id": "{2A5BE0B1-F519-4408-9581-59E74E9BEF0B}",
@@ -2868,7 +2819,7 @@
     ["EA Specifics 1.0::TypeString","String"]],
    "parent": "{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}"},
   {
-   "oid": "+I6HfMzrzFElCrasWB7B5gQIwXO8JE8xayS1WQaHdus=",
+   "oid": "oSwYlt7hed+e67YdQF5LNLNnAFZDposFTSr1UiU2swg=",
    "id": "{6e1ba3c7-5d5a-7d21-a2b7-575960ab727c}",
    "meta": [
     ["+ET","t_attribute"],
@@ -2878,7 +2829,7 @@
    "prop": [
     ["+M","AggregationKind","None"],
     ["+X","+A",""],
-    ["+M","DefaultValue","{A4C1B087-37E5-4ae0-B421-3FF2A161CB71}:5669f1593e7cfca236b0f8c46b299bf17a7ff8857af69e863459bafe73af779b"],
+    ["+M","DefaultValue","{A4C1B087-37E5-4ae0-B421-3FF2A161CB71}:67e0a7fc87d3b38dd70d282edb6df86ca1a48854ad17821980c6149222cbc821"],
     ["+M","+D",""],
     ["+X","IsID","false"],
     ["+M","IsNavigable","false"],
@@ -3047,187 +2998,6 @@
     ["EA Specifics 1.0::StyleEx",""],
     ["EA Specifics 1.0::TypeString","String"]],
    "parent": "{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}"},
-  {
-   "oid": "KSk/QSk+neSZjpC2rxkYd9sJk2lbCknQqFBwwnbxZ/M=",
-   "id": "{6334d3f5-3c1c-0183-e9a4-b47b9fa581bc}",
-   "meta": [
-    ["+ET","t_attribute"],
-    ["+EY","Attribute"],
-    ["+ST",""],
-    ["+UT","Property"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue","{37f0ae88-6f82-3e24-ef99-7073b90b1894}"],
-    ["+M","+D",""],
-    ["+X","IsID","false"],
-    ["+M","IsNavigable","false"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N","Target"],
-    ["+X","PropertyKind","Attribute"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::AllowDuplicates","true"],
-    ["EA Specifics 1.0::IsOrdered","false"],
-    ["EA Specifics 1.0::Length","0"],
-    ["EA Specifics 1.0::Pos","0"],
-    ["EA Specifics 1.0::StyleEx",""],
-    ["EA Specifics 1.0::TypeString","String"]],
-   "parent": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}"},
-  {
-   "oid": "H4ouLxXeIyig94i0uONtsRaACiYnqD5NuxEZHbQ4T8w=",
-   "id": "{6542e5a6-f4c0-714a-3b84-80f5d7113c05}",
-   "meta": [
-    ["+ET","t_attribute"],
-    ["+EY","Attribute"],
-    ["+ST",""],
-    ["+UT","Property"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue","Mandatory"],
-    ["+M","+D",""],
-    ["+X","IsID","false"],
-    ["+M","IsNavigable","false"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N","DependencyClass"],
-    ["+X","PropertyKind","Attribute"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::AllowDuplicates","true"],
-    ["EA Specifics 1.0::IsOrdered","false"],
-    ["EA Specifics 1.0::Length","0"],
-    ["EA Specifics 1.0::Pos","0"],
-    ["EA Specifics 1.0::StyleEx",""],
-    ["EA Specifics 1.0::TypeString","String"]],
-   "parent": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}"},
-  {
-   "oid": "MTgUqqqqzyDJv4Eu5SkdaHaeDuD0u7DIp+sJyoOkP2A=",
-   "id": "{767f8071-e399-0049-58fc-bdf5c2f69ae7}",
-   "meta": [
-    ["+ET","t_attribute"],
-    ["+EY","Attribute"],
-    ["+ST",""],
-    ["+UT","Property"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue","PWC_UseCases"],
-    ["+M","+D",""],
-    ["+X","IsID","false"],
-    ["+M","IsNavigable","false"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N","Name"],
-    ["+X","PropertyKind","Attribute"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::AllowDuplicates","true"],
-    ["EA Specifics 1.0::IsOrdered","false"],
-    ["EA Specifics 1.0::Length","0"],
-    ["EA Specifics 1.0::Pos","0"],
-    ["EA Specifics 1.0::StyleEx",""],
-    ["EA Specifics 1.0::TypeString","String"]],
-   "parent": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}"},
-  {
-   "oid": "+Bb2wItFEnHrx/FIu080GsAZaqn+fiCd0khq/BeUlN0=",
-   "id": "{8a1bab3f-21a8-6e35-d563-41eab67e1909}",
-   "meta": [
-    ["+UT","Dependency"]],
-   "prop": [
-    ["+X","+A",""],
-    ["+M","+D",""],
-    ["+M","+N","d"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::End_Edge","0"],
-    ["EA Specifics 1.0::IsBold","1"],
-    ["EA Specifics 1.0::LineColor","-1"],
-    ["EA Specifics 1.0::OwningDiagram",""],
-    ["EA Specifics 1.0::PtEndX","0"],
-    ["EA Specifics 1.0::PtEndY","0"],
-    ["EA Specifics 1.0::PtStartX","0"],
-    ["EA Specifics 1.0::PtStartY","0"],
-    ["EA Specifics 1.0::RouteStyle","3"],
-    ["EA Specifics 1.0::SeqNo","0"],
-    ["EA Specifics 1.0::Start_Edge","0"],
-    ["EA Specifics 1.0::StateFlags",""],
-    ["EA Specifics 1.0::Target2",""]],
-   "parent": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}",
-   "ref": [
-    ["{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}","Target",17],
-    ["{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}","Source",17]],
-   "sub": [
-    "CfGfLQIs7CAuiODPRWnXChPULEJCz0/Vh2jjbnxuHE4=",
-    "C0VnDbk4Nb1UlYTY5bT45BmHE1sKAedjmEL8NjN2M2M="]},
-  {
-   "oid": "19QlaL009if9yC5kvb/6MsTjiRFfu/4qgrugzeo0hKo=",
-   "id": "{b3fa7fa2-fc1f-8288-03c7-d9d15eb5461c}",
-   "meta": [
-    ["+ET","t_attribute"],
-    ["+EY","Attribute"],
-    ["+ST",""],
-    ["+UT","Property"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue","*"],
-    ["+M","+D",""],
-    ["+X","IsID","false"],
-    ["+M","IsNavigable","false"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N","VersionConstraint"],
-    ["+X","PropertyKind","Attribute"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::AllowDuplicates","true"],
-    ["EA Specifics 1.0::IsOrdered","false"],
-    ["EA Specifics 1.0::Length","0"],
-    ["EA Specifics 1.0::Pos","0"],
-    ["EA Specifics 1.0::StyleEx",""],
-    ["EA Specifics 1.0::TypeString","String"]],
-   "parent": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}"},
-  {
-   "oid": "2j4n+QQkyTQrPGm4ekoYxc19kOQ3QviQL28ARwFtDlo=",
-   "id": "{cbab6598-667c-627a-003d-f7df2cce2350}",
-   "meta": [
-    ["+ET","t_attribute"],
-    ["+EY","Attribute"],
-    ["+ST",""],
-    ["+UT","Property"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue","{48ac4b17-1fb8-e452-081e-386c0822ea7b}"],
-    ["+M","+D",""],
-    ["+X","IsID","false"],
-    ["+M","IsNavigable","false"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N","Source"],
-    ["+X","PropertyKind","Attribute"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::AllowDuplicates","true"],
-    ["EA Specifics 1.0::IsOrdered","false"],
-    ["EA Specifics 1.0::Length","0"],
-    ["EA Specifics 1.0::Pos","0"],
-    ["EA Specifics 1.0::StyleEx",""],
-    ["EA Specifics 1.0::TypeString","String"]],
-   "parent": "{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}"},
   {
    "oid": "eyRCEZMcthTbpoemKmMwr+a5ElSC5QzxSKeBmOcGijE=",
    "id": "{454E5514-B1E1-40e2-B035-F8409217F1B1}",
@@ -4644,58 +4414,6 @@
    "parent": "{2b755dec-41fd-0323-a6f3-ea332f148416}",
    "ref": [
     ["{2b755dec-41fd-0323-a6f3-ea332f148416}","TargetConnectorEndOwner",55],
-    ["{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}","ConnectedObject",17],
-    ["{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}","Type",24]]},
-  {
-   "oid": "C0VnDbk4Nb1UlYTY5bT45BmHE1sKAedjmEL8NjN2M2M=",
-   "id": "{19cb71d1-b73f-f699-42e0-49897fc53a6f}",
-   "meta": [
-    ["IsConnectorEnd","true"],
-    ["+UT","ConnectorEnd"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue",""],
-    ["+M","+D",""],
-    ["+M","IsNavigable","true"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N",""],
-    ["+X","PropertyKind","None"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::SourceStyle","Navigable"]],
-   "parent": "{8a1bab3f-21a8-6e35-d563-41eab67e1909}",
-   "ref": [
-    ["{8a1bab3f-21a8-6e35-d563-41eab67e1909}","SourceConnectorEndOwner",55],
-    ["{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}","ConnectedObject",17],
-    ["{e610ea3c-2cdc-11c4-74d8-27cc2cd65aa4}","Type",24]]},
-  {
-   "oid": "CfGfLQIs7CAuiODPRWnXChPULEJCz0/Vh2jjbnxuHE4=",
-   "id": "{f1f472aa-3b65-88e2-f6f5-c2f7bd98ea44}",
-   "meta": [
-    ["IsConnectorEnd","true"],
-    ["+UT","ConnectorEnd"]],
-   "prop": [
-    ["+M","AggregationKind","None"],
-    ["+X","+A",""],
-    ["+M","DefaultValue",""],
-    ["+M","+D",""],
-    ["+M","IsNavigable","false"],
-    ["+M","IsReadOnly","false"],
-    ["+M","IsStatic","false"],
-    ["+M","LowerBound","1"],
-    ["+M","+N",""],
-    ["+X","PropertyKind","None"],
-    ["+M","UpperBound","1"],
-    ["+M","+V","Public"]],
-   "tval": [
-    ["EA Specifics 1.0::DestStyle","Unspecified"]],
-   "parent": "{8a1bab3f-21a8-6e35-d563-41eab67e1909}",
-   "ref": [
-    ["{8a1bab3f-21a8-6e35-d563-41eab67e1909}","TargetConnectorEndOwner",55],
     ["{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}","ConnectedObject",17],
     ["{a3eae3c7-abec-15ac-7a09-66b5c9d0c69d}","Type",24]]},
   {
