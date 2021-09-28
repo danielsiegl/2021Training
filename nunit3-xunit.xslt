@@ -74,7 +74,8 @@
 							<xsl:value-of select="@total"/>, <span class="passed">Passed:</span><xsl:value-of select="@passed"/>, <span class="failed">Failed:</span><xsl:value-of select="@failed"/>, <span class="inconclusive">Inconclusive:</span><xsl:value-of select="@inconclusive"/>, <span class="skipped">Skipped:</span><xsl:value-of select="@skipped"/>
 						</td>
 					</tr>
-
+					
+					
 					<!-- [Optional] - Failed Test Summary -->
 					<xsl:if test="@failed > 0">
 						<xsl:variable name="failedTotal" select="count(//test-case[@result='Failed' and not(@label)])" />
@@ -203,6 +204,14 @@
 						<xsl:apply-templates select="//test-case[failure]"/>
 					</ol>
 				</xsl:if>
+				
+				<!-- Inconclusive -->
+				<xsl:if test="//test-case[@result='Inconclusive']">
+					<h4>Inconclusive</h4>
+					<ol>
+						<xsl:apply-templates select="//test-case[@result='Inconclusive']"/>
+					</ol>
+				</xsl:if>
 
 				<div>
 					<!-- Tests Run -->
@@ -212,6 +221,7 @@
 							<xsl:apply-templates select="//test-case[@result='Passed']"/>
 						</ol>
 					</xsl:if>
+					
 				</div>
         
         <!-- JavaScript dependencies for jquery, popper and bootstrap -->
