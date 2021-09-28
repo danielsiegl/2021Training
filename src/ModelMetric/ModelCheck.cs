@@ -186,6 +186,22 @@ namespace ModelMetric.Test
 		}
 
 		[Test]
+		public void LemonTree_No_UserSecurity_Enabled()
+		{
+			var testReturn = RunSQL(Properties.Settings.Default.LemonTree_No_UserSecurity_Enabled, false);
+			if (testReturn.RecordCount == 0)
+			{
+				Assert.Pass("User Security not enabled in the Model!");
+			}
+			else
+			{
+				var sb = new System.Text.StringBuilder();
+				sb.AppendLine($"<br><b>User Security not enabled in the Model! Can cause higher complexity with LemonTree</b>");
+				Assert.Inconclusive(sb.ToString());
+			}
+		}
+
+		[Test]
 		public void All_UseCases_without_Notes()
 		{
 			var testReturn = RunSQL(Properties.Settings.Default.All_UseCases_without_Notes,true);

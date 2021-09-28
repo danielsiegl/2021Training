@@ -39,5 +39,8 @@ Having count(t_object.Name)  &gt;1</Value>
     <Setting Name="Lemontree_No_t_image" Type="System.String" Scope="User">
       <Value Profile="(Default)">select * from t_image</Value>
     </Setting>
+    <Setting Name="LemonTree_No_UserSecurity_Enabled" Type="System.String" Scope="User">
+      <Value Profile="(Default)">select * from t_secpolicies where t_secpolicies.Property = 'UserSecurity' and t_secpolicies.Value = 'Enabled'</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

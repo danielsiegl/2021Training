@@ -160,5 +160,18 @@ Having count(t_object.Name)  >1")]
                 this["Lemontree_No_t_image"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("select * from t_secpolicies where t_secpolicies.Property = \'UserSecurity\' and t_s" +
+            "ecpolicies.Value = \'Enabled\'")]
+        public string LemonTree_No_UserSecurity_Enabled {
+            get {
+                return ((string)(this["LemonTree_No_UserSecurity_Enabled"]));
+            }
+            set {
+                this["LemonTree_No_UserSecurity_Enabled"] = value;
+            }
+        }
     }
 }
