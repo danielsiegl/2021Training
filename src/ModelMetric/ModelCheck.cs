@@ -181,7 +181,7 @@ namespace ModelMetric.Test
 			{
 				var sb = new System.Text.StringBuilder();
 				sb.AppendLine($"<br><b>{testReturn.RecordCount} t_image have been found - can cause problems moving from *.eap(x) to SQL LemonTree</b>");
-				Assert.Warn(sb.ToString());
+				Assert.Inconclusive(sb.ToString());
 			}
 		}
 
