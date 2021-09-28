@@ -61,7 +61,7 @@ namespace ModelMetric.Test.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"SELECT DISTINCT  a.ea_guid as CLASSGUID,   a.Name as Name, a.Alias as Alias_Name, a.Object_Type as CLASSTYPE, t_package.Name as Package_Name FROM t_object as a, t_object as b,  t_package WHERE a.Name = b.Name AND a.ea_guid <> b.ea_guid AND a.Object_Type = b.Object_Type AND a.Package_ID = b.Package_ID AND a.Package_ID = t_package.Package_ID AND a.name <> ""External Reference"" order by a.name")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"SELECT DISTINCT  a.ea_guid as CLASSGUID,   a.Name as Name, a.Alias as Alias_Name, a.Object_Type as CLASSTYPE, t_package.Name as Package_Name FROM t_object as a, t_object as b,  t_package WHERE a.Name = b.Name AND a.ea_guid <> b.ea_guid AND a.Object_Type = b.Object_Type AND a.Package_ID = b.Package_ID AND a.Package_ID = t_package.Package_ID AND a.name <> ""External Reference"" and a.Object_Type <> ""Port"" order by a.name")]
         public string duplicate_Name_in_Package {
             get {
                 return ((string)(this["duplicate_Name_in_Package"]));
@@ -118,6 +118,42 @@ namespace ModelMetric.Test.Properties {
             }
             set {
                 this["EALink"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM t_document where t_document.DocType = \'Baseline\'")]
+        public string Lemontree_No_Baselines {
+            get {
+                return ((string)(this["Lemontree_No_Baselines"]));
+            }
+            set {
+                this["Lemontree_No_Baselines"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("select * from t_snapshot")]
+        public string Lemontree_No_Audit {
+            get {
+                return ((string)(this["Lemontree_No_Audit"]));
+            }
+            set {
+                this["Lemontree_No_Audit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("select * from t_image")]
+        public string Lemontree_No_t_image {
+            get {
+                return ((string)(this["Lemontree_No_t_image"]));
+            }
+            set {
+                this["Lemontree_No_t_image"] = value;
             }
         }
     }
