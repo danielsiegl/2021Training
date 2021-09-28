@@ -73,7 +73,11 @@ namespace ModelMetric.Test.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"SELECT t_object.ea_guid, t_object.Name, count(t_object.Name) as ""Incomming ControlFlows"" FROM t_object INNER JOIN t_connector on (t_object.Object_ID = t_connector.End_Object_ID) WHERE t_object.Object_Type = 'Action' AND t_connector.Connector_Type = 'ControlFlow' GROUP BY t_object.ea_guid,t_object.Name")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"SELECT t_object.ea_guid, t_object.Name, count(t_object.Name) as ""Incomming ControlFlows"" 
+FROM t_object INNER JOIN t_connector on (t_object.Object_ID = t_connector.End_Object_ID) 
+WHERE t_object.Object_Type = 'Action' AND t_connector.Connector_Type = 'ControlFlow' 
+GROUP BY t_object.ea_guid,t_object.Name
+Having count(t_object.Name)  >1")]
         public string All_Actions_with_more_than_one_incomming_ControlFlow {
             get {
                 return ((string)(this["All_Actions_with_more_than_one_incomming_ControlFlow"]));

@@ -262,3 +262,5 @@ __pycache__/
 
 *.ldb
 *.testlog
+*.dtbcache.v2
+*.manifest

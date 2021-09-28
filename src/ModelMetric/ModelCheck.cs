@@ -97,7 +97,7 @@ namespace ModelMetric.Test
 				sb.AppendLine($"<br><b>{testReturn.RecordCount} Requirements are NOT connected with Realization OR trace to other elements</b>");
 				sb.Append(testReturn.ResultText);
 
-				Assert.Fail(sb.ToString());
+				Assert.Warn(sb.ToString());
 			}
 		}
 
