@@ -97,7 +97,7 @@ namespace ModelMetric.Test
 				sb.AppendLine($"<br><b>{testReturn.RecordCount} Requirements are NOT connected with Realization OR trace to other elements</b>");
 				sb.Append(testReturn.ResultText);
 
-				Assert.Warn(sb.ToString());
+				Assert.Inconclusive(sb.ToString());
 			}
 		}
 
@@ -181,7 +181,7 @@ namespace ModelMetric.Test
 			{
 				var sb = new System.Text.StringBuilder();
 				sb.AppendLine($"<br><b>{testReturn.RecordCount} t_image have been found - can cause problems moving from *.eap(x) to SQL LemonTree</b>");
-				Assert.Inconclusive(sb.ToString());
+				Assert.Fail(sb.ToString());
 			}
 		}
 
@@ -197,7 +197,7 @@ namespace ModelMetric.Test
 			{
 				var sb = new System.Text.StringBuilder();
 				sb.AppendLine($"<br><b>User Security not enabled in the Model! Can cause higher complexity with LemonTree</b>");
-				Assert.Inconclusive(sb.ToString());
+				Assert.Fail(sb.ToString());
 			}
 		}
 
