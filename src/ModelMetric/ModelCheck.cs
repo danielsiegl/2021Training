@@ -170,6 +170,22 @@ namespace ModelMetric.Test
 		}
 
 		[Test]
+		public void LemonTree_No_DIAGRAMIMAGEMAP()
+		{
+			var testReturn = RunSQL(Properties.Settings.Default.LemonTree_No_DIAGRAMIMAGEMAP, true);
+			if (testReturn.RecordCount == 0)
+			{
+				Assert.Pass("No DIAGRAMIMAGEMAP in the Model!");
+			}
+			else
+			{
+				var sb = new System.Text.StringBuilder();
+				sb.AppendLine($"<br><b>{testReturn.RecordCount} DIAGRAMIMAGEMAP (prerendered) have been found - these will potentially report conflicts within LemonTree</b>");
+				Assert.Inconclusive(sb.ToString());
+			}
+		}
+
+		[Test]
 		public void Lemontree_No_t_image()
 		{
 			var testReturn = RunSQL(Properties.Settings.Default.Lemontree_No_t_image, false);

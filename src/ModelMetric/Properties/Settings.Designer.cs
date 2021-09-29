@@ -173,5 +173,19 @@ Having count(t_object.Name)  >1")]
                 this["LemonTree_No_UserSecurity_Enabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("select t_diagram.ea_guid,t_diagram.name \r\nfrom t_document, t_diagram \r\nwhere t_do" +
+            "cument.DocName =\'DIAGRAMIMAGEMAP\' and t_diagram.ea_guid = t_document.ElementID\r\n" +
+            "")]
+        public string LemonTree_No_DIAGRAMIMAGEMAP {
+            get {
+                return ((string)(this["LemonTree_No_DIAGRAMIMAGEMAP"]));
+            }
+            set {
+                this["LemonTree_No_DIAGRAMIMAGEMAP"] = value;
+            }
+        }
     }
 }

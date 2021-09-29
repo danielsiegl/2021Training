@@ -42,5 +42,11 @@ Having count(t_object.Name)  &gt;1</Value>
     <Setting Name="LemonTree_No_UserSecurity_Enabled" Type="System.String" Scope="User">
       <Value Profile="(Default)">select * from t_secpolicies where t_secpolicies.Property = 'UserSecurity' and t_secpolicies.Value = 'Enabled'</Value>
     </Setting>
+    <Setting Name="LemonTree_No_DIAGRAMIMAGEMAP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">select t_diagram.ea_guid,t_diagram.name 
+from t_document, t_diagram 
+where t_document.DocName ='DIAGRAMIMAGEMAP' and t_diagram.ea_guid = t_document.ElementID
+</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

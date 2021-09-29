@@ -14,10 +14,13 @@ bool isFeature;
 bool isComponentsFeature;
 
 string lemonTreeAutomation = @"C:\tools\LemonTree.Automation\LemonTree.Automation.exe";
+string lemonTreeAutomationSetFilter = @"src\SetFilterInSessionFile\bin\Release\SetFilterInSessionFile.exe";
+string lemonTreeRemovePrerendredDiagrams = @"src\RemovePrerenderedDiagrams\bin\Release\RemovePrerenderedDiagrams.exe";
 string projectTransfer = @"C:\tools\ProjectTransfer\ProjectTransferUM.exe";
 string packagerPath = @"C:\tools\LemonTree.Packager.CLI_3.1.4-lee-xxxx-nw-pack0004\LemonTree.Packager.CLI.exe";
 string modelsPath = @"C:\tools\Models\";
 string solution = @"src/ModelMetric.sln";
+
 
 string shortcutToMaster = modelsPath + "LL_TEST_MASTER.EAP";
 string shortcutToDevelop = modelsPath + "LL_TEST_DEVELOP.EAP";
@@ -198,6 +201,7 @@ public void CompareTo(string branchName)
 {
 	// Use LT Automation to compare the latest commit of the current branch to the latest commit of the branch given as a parameter.
 	// The base for the comparison is the merge-base between the branches.
+	
 	var result = ExecuteGitCommand("rev-parse head");
 	var headCommitId = result.Output[0];
 	result = ExecuteGitCommand($"rev-parse {branchName}");
@@ -212,6 +216,7 @@ public void CompareTo(string branchName)
 	string headPath = $"automation/head.eap";
 	string targetBranchPath = $"automation/targetBranch.eap";
 	string mergeBasePath = $"automation/mergeBase.eap";
+	string sessionFilePath = $"automation/LemonTreeSessionFile.ltsfs";
 
 	EnsureDirectoryExists("automation");
 
@@ -221,8 +226,19 @@ public void CompareTo(string branchName)
 	ExtractFileVersion(targetBranchCommitId, targetBranchPath);
 	ExtractFileVersion(mergeBaseCommitId, mergeBasePath);
 	ExtractFileVersion(headCommitId, headPath);
+	
+	
+	//diagramimagemaps create false conflicts so we clean em out.
+	ExecuteCommand(lemonTreeRemovePrerendredDiagrams,mergeBasePath);
+	ExecuteCommand(lemonTreeRemovePrerendredDiagrams,headPath);
+	
+	ExecuteCommand(lemonTreeRemovePrerendredDiagrams,targetBranchPath); // If you commment out this line there will be no conflicts but DIAGRAMIMAGEMAP will allways be new
 
-	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs automation/{branchName}.ltsfs");
+
+
+	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionFilePath}");
+
+    var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
 
 	if(result.ExitCode == 3)
 	{
