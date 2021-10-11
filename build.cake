@@ -215,6 +215,7 @@ public void CompareTo(string branchName)
 
 	string headPath = $"automation/head.eap";
 	string targetBranchPath = $"automation/targetBranch.eap";
+	string previousCommitPath = $"automation/previousCommit.eap";
 	string mergeBasePath = $"automation/mergeBase.eap";
 	string sessionFilePath = $"automation/LemonTreeSessionFile.ltsfs";
 
@@ -238,13 +239,24 @@ public void CompareTo(string branchName)
 
 	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionFilePath}");
 
-    var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
 
 	if(result.ExitCode == 3)
 	{
+		var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
 		Information($"LemonTree Automation has detected a conflict between the current branch and branch {branchName}.");
 		TeamCity.BuildProblem("Conflict in file PWC.eapx detected.");
 		throw new Exception("Conflict in file PWC.eapx detected.");
+	}
+	else
+	{
+		result = ExecuteGitCommand($"rev-parse {branchName}^1");
+		var previousCommitId = result.Output[0];
+		ExtractFileVersion(previousCommitId, previousCommitPath);
+		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
+	
+		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionFilePath}");
+		
+		var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"\" \"$HideGraphicalChanges \"");
 	}
 }
 
