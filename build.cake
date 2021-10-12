@@ -240,6 +240,15 @@ public void CompareTo(string branchName)
 
 	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionMergeFilePath}");
 
+		// I want to run the diff also if a merge conflict happend.
+		result = ExecuteGitCommand($"rev-parse {branchName}^1");
+		var previousCommitId = result.Output[0];
+		ExtractFileVersion(previousCommitId, previousCommitPath);
+		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
+	
+		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
+		
+		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
 
 	if(result.ExitCode == 3)
 	{
@@ -249,15 +258,7 @@ public void CompareTo(string branchName)
 		throw new Exception("Conflict in file PWC.eapx detected.");
 	}
 	
-	// I want to run the diff also if a merge conflict happend.
-		result = ExecuteGitCommand($"rev-parse {branchName}^1");
-		var previousCommitId = result.Output[0];
-		ExtractFileVersion(previousCommitId, previousCommitPath);
-		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
 	
-		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
-		
-		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
 	
 }
 
