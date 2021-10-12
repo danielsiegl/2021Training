@@ -246,7 +246,9 @@ public void CompareTo(string branchName)
 		ExtractFileVersion(previousCommitId, previousCommitPath);
 		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
 	
-		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
+		//result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
+		//workaround as long as diff will not write ltsfs files.
+		result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {headPath} --mine {previousCommitPath} --out dummy.eapx --sfs {sessionDiffFilePath}");
 		
 		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
 
