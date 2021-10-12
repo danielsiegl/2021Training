@@ -217,7 +217,8 @@ public void CompareTo(string branchName)
 	string targetBranchPath = $"automation/targetBranch.eap";
 	string previousCommitPath = $"automation/previousCommit.eap";
 	string mergeBasePath = $"automation/mergeBase.eap";
-	string sessionFilePath = $"automation/LemonTreeSessionFile.ltsfs";
+	string sessionMergeFilePath = $"automation/LTMergeTest.ltsfs";
+	string sessionDiffFilePath = $"automation/LTDiffLastCommit.ltsfs";
 
 	EnsureDirectoryExists("automation");
 
@@ -237,7 +238,7 @@ public void CompareTo(string branchName)
 
 
 
-	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionFilePath}");
+	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionMergeFilePath}");
 
 
 	if(result.ExitCode == 3)
@@ -247,17 +248,17 @@ public void CompareTo(string branchName)
 		TeamCity.BuildProblem("Conflict in file PWC.eapx detected.");
 		throw new Exception("Conflict in file PWC.eapx detected.");
 	}
-	else
-	{
+	
+	// I want to run the diff also if a merge conflict happend.
 		result = ExecuteGitCommand($"rev-parse {branchName}^1");
 		var previousCommitId = result.Output[0];
 		ExtractFileVersion(previousCommitId, previousCommitPath);
 		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
 	
-		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionFilePath}");
+		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
 		
 		var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"\" \"$HideGraphicalChanges \"");
-	}
+	
 }
 
 public void ExtractFileVersion(string commitId, string targetPath)
