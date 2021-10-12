@@ -240,6 +240,9 @@ public void CompareTo(string branchName)
 
 	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionMergeFilePath}");
 	var resultMerge = result;
+	
+	if(isFeature)
+	{
 		// I want to run the diff also if a merge conflict happend.
 		result = ExecuteGitCommand($"rev-parse {branchName}^1");
 		var previousCommitId = result.Output[0];
@@ -251,7 +254,8 @@ public void CompareTo(string branchName)
 		result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {headPath} --mine {previousCommitPath} --out dummy.eapx --sfs {sessionDiffFilePath}");
 		
 		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
-
+	}
+	
 	if(resultMerge.ExitCode == 3)
 	{
 		var resultUpdateFilterMerge= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionMergeFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
