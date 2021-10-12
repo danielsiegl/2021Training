@@ -243,7 +243,7 @@ public void CompareTo(string branchName)
 
 	if(result.ExitCode == 3)
 	{
-		var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
+		var resultUpdateFilterMerge= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionMergeFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
 		Information($"LemonTree Automation has detected a conflict between the current branch and branch {branchName}.");
 		TeamCity.BuildProblem("Conflict in file PWC.eapx detected.");
 		throw new Exception("Conflict in file PWC.eapx detected.");
@@ -257,7 +257,7 @@ public void CompareTo(string branchName)
 	
 		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
 		
-		var resultUpdateFilter= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionFilePath} \"\" \"$HideGraphicalChanges \"");
+		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
 	
 }
 
