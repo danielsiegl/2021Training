@@ -250,7 +250,7 @@ public void CompareTo(string branchName)
 	
 		//result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
 		//workaround as long as diff will not write ltsfs files.
-		result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {previousCommitPath} --mine {headPath} --out dummy.eapx --sfs {sessionDiffFilePath}");
+		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {previousCommitPath} --mine {headPath} --sfs {sessionDiffFilePath}");
 		
 		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
 
