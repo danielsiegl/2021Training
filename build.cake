@@ -12,6 +12,7 @@ bool isSupport;
 bool isDevelop;
 bool isFeature;
 bool isComponentsFeature;
+string currentBranch;
 
 string lemonTreeAutomation = @"C:\tools\LemonTree.Automation\LemonTree.Automation.exe";
 string lemonTreeAutomationSetFilter = @"src\SetFilterInSessionFile\bin\Release\SetFilterInSessionFile.exe";
@@ -145,6 +146,7 @@ Task("Automation")
 	isFeature = gitVersion.BranchName.StartsWith("feature/") || gitVersion.BranchName == "review";
 	isComponentsFeature = gitVersion.BranchName.StartsWith("feature/PackagerIntegration");
 	isDevelop = !isMaster && !isSupport && !isFeature;
+	currentBranch = gitVersion.BranchName; 
 	
 	Information($"Branchname: {gitVersion.BranchName}");
 	Information($"isMaster: {isMaster}");
@@ -166,12 +168,12 @@ Task("Automation")
 		//There's no straight-forward way to determine the branch to compare to for an arbitrary branch.
 		//There are some implementations for determining the "parent" branch on stackoverflow, but I'm not sure if that's even the right choice,
 		//and they also need additional tool support (grep) to work.
-		CompareTo("main");
+		CompareTo("main",currentBranch);
 	}
 
 	if(isFeature)
 	{
-		CompareTo("develop");
+		CompareTo("develop",currentBranch);
 	}	
 
 	if (isComponentsFeature)
@@ -197,7 +199,7 @@ Task("Default")
 });
 
 
-public void CompareTo(string branchName)
+public void CompareTo(string branchName,string currentBranch)
 {
 	// Use LT Automation to compare the latest commit of the current branch to the latest commit of the branch given as a parameter.
 	// The base for the comparison is the merge-base between the branches.
@@ -240,22 +242,20 @@ public void CompareTo(string branchName)
 
 	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionMergeFilePath}");
 	var resultMerge = result;
-	
-	if(isFeature)
-	{
 		// I want to run the diff also if a merge conflict happend.
-		result = ExecuteGitCommand($"rev-parse {branchName}^1");
+		// This should give us the previous commmit on the same branch - currently not working
+		result = ExecuteGitCommand($"rev-parse {currentBranch}~1");
 		var previousCommitId = result.Output[0];
+		Information($"rev-parse output: {result.Output[0]}");
 		ExtractFileVersion(previousCommitId, previousCommitPath);
 		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
 	
 		//result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {headPath} --mine {previousCommitPath} --sfs {sessionDiffFilePath}");
 		//workaround as long as diff will not write ltsfs files.
-		result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {headPath} --mine {previousCommitPath} --out dummy.eapx --sfs {sessionDiffFilePath}");
+		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {previousCommitPath} --mine {headPath} --sfs {sessionDiffFilePath}");
 		
 		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
-	}
-	
+
 	if(resultMerge.ExitCode == 3)
 	{
 		var resultUpdateFilterMerge= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionMergeFilePath} \"#Conflicted\" \"$HideGraphicalChanges \"");
