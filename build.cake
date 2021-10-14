@@ -241,6 +241,7 @@ public void CompareTo(string branchName)
 	result = ExecuteCommand(lemonTreeAutomation, $"merge --theirs {targetBranchPath} --mine {headPath} --base {mergeBasePath} --out=automation/out.eap --sfs {sessionMergeFilePath}");
 	var resultMerge = result;
 		// I want to run the diff also if a merge conflict happend.
+		// This should give us the previous commmit on the same branch - currently not working
 		result = ExecuteGitCommand($"rev-parse {branchName}~");
 		var previousCommitId = result.Output[0];
 		ExtractFileVersion(previousCommitId, previousCommitPath);
