@@ -244,7 +244,7 @@ public void CompareTo(string branchName)
 		// This should give us the previous commmit on the same branch - currently not working
 		result = ExecuteGitCommand($"rev-parse {branchName}~1");
 		var previousCommitId = result.Output[0];
-		Information($"rev-parse output: {Output}");
+		Information($"rev-parse output: {result.Output}");
 		ExtractFileVersion(previousCommitId, previousCommitPath);
 		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
 	
