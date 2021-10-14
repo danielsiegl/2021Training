@@ -242,7 +242,7 @@ public void CompareTo(string branchName)
 	var resultMerge = result;
 		// I want to run the diff also if a merge conflict happend.
 		// This should give us the previous commmit on the same branch - currently not working
-		result = ExecuteGitCommand($"rev-parse {branchName}~");
+		result = ExecuteGitCommand($"rev-parse {branchName}~1");
 		var previousCommitId = result.Output[0];
 		ExtractFileVersion(previousCommitId, previousCommitPath);
 		ExecuteCommand(lemonTreeRemovePrerendredDiagrams,previousCommitPath);
