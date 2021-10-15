@@ -263,7 +263,7 @@ public void CompareTo(string branchName,string currentBranch)
 		else
 		{
 			Information($"Deleting Session File {sessionDiffFilePath} because the models are identical");
-			File.Delete(sessionDiffFilePath);
+			DeleteFile(sessionDiffFilePath);
 		}
 		
 
