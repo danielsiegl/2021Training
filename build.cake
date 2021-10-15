@@ -254,7 +254,18 @@ public void CompareTo(string branchName,string currentBranch)
 		//workaround as long as diff will not write ltsfs files.
 		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {previousCommitPath} --mine {headPath} --sfs {sessionDiffFilePath}");
 		
-		var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
+		//if there is no differences in the modle delete the session file.
+		if (!result.Output.Contains("Found 0 different elements."))
+		{
+			
+			var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
+		}
+		else
+		{
+			Information($"Deleting Session File {sessionDiffFilePath} because the models are identical");
+			DeleteFile(sessionDiffFilePath);
+		}
+		
 
 	if(resultMerge.ExitCode == 3)
 	{
