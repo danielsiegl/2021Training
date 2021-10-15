@@ -255,7 +255,7 @@ public void CompareTo(string branchName,string currentBranch)
 		result = ExecuteCommand(lemonTreeAutomation, $"diff --theirs {previousCommitPath} --mine {headPath} --sfs {sessionDiffFilePath}");
 		
 		//if there is no differences in the modle delete the session file.
-		if (!result.Output.Contains("Found 0 different elements.")
+		if (!result.Output.Contains("Found 0 different elements."))
 		{
 			
 			var resultUpdateFilterDiff= ExecuteCommand(lemonTreeAutomationSetFilter, $"{sessionDiffFilePath} \"\" \"$HideGraphicalChanges \"");
