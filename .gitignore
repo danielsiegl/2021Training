@@ -476,3 +476,4 @@ __pycache__/
 /tools/NUnit.ConsoleRunner.3.12.0/tools/agents/net40/testcentric.engine.metadata.dll
 /tools/NUnit.ConsoleRunner.3.12.0/tools/testcentric.engine.metadata.dll
 /tools/NUnit.Extension.TeamCityEventListener.1.0.7/tools/teamcity-event-listener.dll
+*.mdzip.bak
