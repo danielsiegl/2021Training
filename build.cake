@@ -13,7 +13,7 @@ bool isComponentsFeature;
 
 string lemonTreeAutomation = @"C:\tools\LemonTree.Automation\LemonTree.Automation.exe";
 string projectTransfer = @"C:\tools\ProjectTransfer\ProjectTransferUM.exe";
-string packagerPath = @"C:\tools\LemonTree.Packager.CLI_3.1.4-lee-xxxx-nw-pack0004\LemonTree.Packager.CLI.exe";
+string packagerPath = @"C:\tools\LemonTree.Packager.CLI_3.2.1-lee-xxxx-nw-pack0001\LemonTree.Packager.CLI.exe";
 string modelsPath = @"C:\tools\Models\";
 
 string shortcutToMaster = modelsPath + "LL_TEST_MASTER.EAP";
