@@ -1,20 +1,20 @@
-﻿//version: 3 (UM: 10.0.8.0)
-//{"ReadOnly":false,"Name":"PWC_TestCases","Guid":"{8a94fb8c-5b73-75a3-d0ad-880e2215643b}","Description":"","Authors":"","Owners":"","ReleaseNotes":"","Copyright":"","Tags":"","Version":"A","OID":"eadd36ca47d5f95d21ff4cd049f1f871079add8836558ff9514f51dcfb6b808f","Status":0,"Dependencies":[],"ModelPackageInfo":"{3F789D71-B8E9-4206-B7D4-B210C26C008C}:81beb11ed9a7e3c8222f25d66a8af0c1b52bfd75dc17ddc552243aaa7bef4d6f"}
+﻿//version: 3 (UM: 10.0.7.0)
+//{"ReadOnly":false,"Name":"PWC_TestCases","Guid":"{8a94fb8c-5b73-75a3-d0ad-880e2215643b}","Description":"","Authors":"","Owners":"","ReleaseNotes":"","Copyright":"","Tags":"","Version":"A","Status":0,"Dependencies":[],"ModelPackageInfo":"{3F789D71-B8E9-4206-B7D4-B210C26C008C}:f789a0768fccaafb6c3e1e7d76eb079ed9c3b0dcea91396a47bc5f7fe7860e6a"}
 //format: Raw
 {
- "version": "10.0.8.0",
+ "version": "10.0.7.0",
  "objects": [
   {
-   "oid": "BnjEoB9u0ItNuwwI7GjcwSgKLulaDGjUkRcQKYh5KBo=",
+   "oid": "I4yZ33QaxdyPKZ3RcVuMLbFAOQulz05eZSgV+DRJpWY=",
    "id": "{ad3530e8-e8b3-9bb3-96c7-d184b0b35296}",
    "meta": [],
    "prop": [],
    "sub": [
-    "UP6J7lX2ZcKAceTB6BJGUO6GCiUll7FVtieOirIzmng=",
-    "kucrJUIJYxDi2PiA5aZTU7NJja4ocFgsxz+FgBTmkwE=",
+    "NMxsw0uXQiYsHP+4NtAjLYeuor7YxQ/3qbnES6LQVHY=",
+    "w8MLctMJQDhZe7Ly6S58OPQb1PqZO9xkk7f4BACNZA8=",
     "8eURB+dmqWM1ydJNqVBgpiaDU88bkKSWkWUPddVWRU4="]},
   {
-   "oid": "kucrJUIJYxDi2PiA5aZTU7NJja4ocFgsxz+FgBTmkwE=",
+   "oid": "NMxsw0uXQiYsHP+4NtAjLYeuor7YxQ/3qbnES6LQVHY=",
    "id": "{1C7F10E3-7B3B-44F5-8954-A99BA9CFD3BA}",
    "meta": [
     ["+ET","t_package"],
@@ -38,12 +38,12 @@
     ["+M","+V","Public"]],
    "parent": "{ad3530e8-e8b3-9bb3-96c7-d184b0b35296}",
    "sub": [
-    "Ri9DLHAEWKpudVIUvTskfgGc3+giqDYmeo65mL3HyR8=",
+    "Dw11EZrA3cfechSTQuVvyG/24Aus7v+TlbSS2mS97UA=",
     "Xv9uKUBRTGBp9AxXy1+kALfEeS6cn/4/NQCw/Hxwk4s=",
-    "mOsA6+XVvmF4YGQdGBoB8IhYb61o4cHDy7jBX7b1fgg=",
-    "rUcqot07e6BRoMhaeYz/ycOiist02oRawiISGBb9AXI="]},
+    "frBsPSDs4vKYXuolXwJyt9tsbPYmm7V8iKRuc0Iu8Tg=",
+    "3KIWo0Ck2U5NDjdP6xvs+UJq4Cx5KbtIEezMWgbJhJM="]},
   {
-   "oid": "UP6J7lX2ZcKAceTB6BJGUO6GCiUll7FVtieOirIzmng=",
+   "oid": "w8MLctMJQDhZe7Ly6S58OPQb1PqZO9xkk7f4BACNZA8=",
    "id": "{EA1D0A51-F03B-4840-ACBA-B41F592304EE}",
    "meta": [
     ["+UT","Model"]],
@@ -55,8 +55,8 @@
     ["+M","+V","Public"]],
    "parent": "{ad3530e8-e8b3-9bb3-96c7-d184b0b35296}",
    "sub": [
-    "BZZnU7oJG/9oBeTULPous3pQ0oy4hdGCsRexdgR6sqA=",
-    "YPlJQHRi6bukFeWVZeu0TU5kjcKBPh33ZuSJ21ryebU="]},
+    "NVyg+VCNc5A6wS66gB1vxV8O9Zfcxp7YO7iQ1jCmHSI=",
+    "zRE2WCa9tbKx99tPAChf70nLl5VT0MAN8Ivp0jyweaU="]},
   {
    "oid": "8eURB+dmqWM1ydJNqVBgpiaDU88bkKSWkWUPddVWRU4=",
    "id": "{c3429f45-af90-7043-be74-4bd283005fe4}",
@@ -91,7 +91,7 @@
     ["+M","+V","Public"]],
    "parent": "{1C7F10E3-7B3B-44F5-8954-A99BA9CFD3BA}"},
   {
-   "oid": "rUcqot07e6BRoMhaeYz/ycOiist02oRawiISGBb9AXI=",
+   "oid": "Dw11EZrA3cfechSTQuVvyG/24Aus7v+TlbSS2mS97UA=",
    "id": "{mpms model dependency+class}",
    "meta": [
     ["+ET","t_stereotypes"],
@@ -118,9 +118,9 @@
     ["UM::ea_guid","{e84eb4c8-5415-e9e8-fcdd-096713c4d576}"]],
    "parent": "{1C7F10E3-7B3B-44F5-8954-A99BA9CFD3BA}",
    "ref": [
-    ["{EA Specifics 1.0::t_stereotypes}","Stereotype",72]]},
+    ["{EA Specifics 1.0::t_stereotypes}","Stereotype",8]]},
   {
-   "oid": "mOsA6+XVvmF4YGQdGBoB8IhYb61o4cHDy7jBX7b1fgg=",
+   "oid": "3KIWo0Ck2U5NDjdP6xvs+UJq4Cx5KbtIEezMWgbJhJM=",
    "id": "{mpms spec metadata+class}",
    "meta": [
     ["+ET","t_stereotypes"],
@@ -147,9 +147,9 @@
     ["UM::ea_guid","{a81560c2-4888-7147-a2a7-90e3a8ec934d}"]],
    "parent": "{1C7F10E3-7B3B-44F5-8954-A99BA9CFD3BA}",
    "ref": [
-    ["{EA Specifics 1.0::t_stereotypes}","Stereotype",72]]},
+    ["{EA Specifics 1.0::t_stereotypes}","Stereotype",8]]},
   {
-   "oid": "Ri9DLHAEWKpudVIUvTskfgGc3+giqDYmeo65mL3HyR8=",
+   "oid": "frBsPSDs4vKYXuolXwJyt9tsbPYmm7V8iKRuc0Iu8Tg=",
    "id": "{mpms spec+package}",
    "meta": [
     ["+ET","t_stereotypes"],
@@ -176,9 +176,9 @@
     ["UM::ea_guid","{ca9963d3-753c-6215-6037-19b8d39a1232}"]],
    "parent": "{1C7F10E3-7B3B-44F5-8954-A99BA9CFD3BA}",
    "ref": [
-    ["{EA Specifics 1.0::t_stereotypes}","Stereotype",72]]},
+    ["{EA Specifics 1.0::t_stereotypes}","Stereotype",8]]},
   {
-   "oid": "YPlJQHRi6bukFeWVZeu0TU5kjcKBPh33ZuSJ21ryebU=",
+   "oid": "NVyg+VCNc5A6wS66gB1vxV8O9Zfcxp7YO7iQ1jCmHSI=",
    "id": "{3F789D71-B8E9-4206-B7D4-B210C26C008C}",
    "meta": [
     ["+ET","t_package"],
@@ -207,11 +207,11 @@
     ["Element Metadata 1.0::ModifiedDate","2021-08-12T11:28:10Z"]],
    "parent": "{EA1D0A51-F03B-4840-ACBA-B41F592304EE}",
    "sub": [
-    "BuapMywRFTq+44x+I/lF1A4iVr1WNnuuZstNoU7pWro=",
-    "ECiPtkQYnAe11zNI0FpHWw8eNB3Deqak97Ua4bVOZuM=",
-    "4g/r87WesgVQoVoyNuNxr/qkl2AheLfshvu1QLORDSU="]},
+    "PPb0GHI11BCjvmeISuRC2siwyAtLqvSSgs04saNFTKw=",
+    "dC/0OTfos7KU2tLIB90w+YepZvY+beK9fT4XHOaunG4=",
+    "/i69mSFiTOquwJpEBkMqHLZYkg0jmvJV/r4M5Jo4tX0="]},
   {
-   "oid": "BZZnU7oJG/9oBeTULPous3pQ0oy4hdGCsRexdgR6sqA=",
+   "oid": "zRE2WCa9tbKx99tPAChf70nLl5VT0MAN8Ivp0jyweaU=",
    "id": "{a41c38ff-1a48-cbc0-4b84-5019da4fde0d}",
    "meta": [
     ["+ET","t_package"],
@@ -246,10 +246,10 @@
    "parent": "{EA1D0A51-F03B-4840-ACBA-B41F592304EE}",
    "ref": [
     ["{mpms spec+package}","PrimaryStereotype",16],
-    ["{mpms spec+package}","Stereotype",72]],
+    ["{mpms spec+package}","Stereotype",8]],
    "sub": [
-    "Cjtv5SufpkkaN3h6Se/NyzfJ+V/HxgbEQWHt+AS0k0w=",
-    "tNZ+i0jvglCuNVIMxg0aApfIwjm4AXeenSFgYdavsos="]},
+    "BbtOm5sSXzyLwVrDE0SC9T5+TKPNmv5fqZsql76PguI=",
+    "qCgOEEpX8nUuatuXofv6t1A5FGRg7D0y7te8wtFHkl8="]},
   {
    "oid": "D/5oCpIjOr3K+mJGu/5HVKWutb4NhLP0geBAiZYk0OA=",
    "id": "{6e9e9a00-7e44-5dbc-808b-3e78bf2c2a6b}",
@@ -265,7 +265,7 @@
    "sub": [
     "oWz8GYNTTqNEE+x+F5ARBM/4ZngzhF/xANwypzCYq4s="]},
   {
-   "oid": "4g/r87WesgVQoVoyNuNxr/qkl2AheLfshvu1QLORDSU=",
+   "oid": "dC/0OTfos7KU2tLIB90w+YepZvY+beK9fT4XHOaunG4=",
    "id": "{4121D848-58F8-4274-A989-5CAE6CE76622}",
    "meta": [
     ["+ET","t_object"],
@@ -309,9 +309,9 @@
    "parent": "{3F789D71-B8E9-4206-B7D4-B210C26C008C}",
    "ref": [
     ["{SysML1.4::testCase}","PrimaryStereotype",16],
-    ["{SysML1.4::testCase}","Stereotype",72]]},
+    ["{SysML1.4::testCase}","Stereotype",8]]},
   {
-   "oid": "ECiPtkQYnAe11zNI0FpHWw8eNB3Deqak97Ua4bVOZuM=",
+   "oid": "/i69mSFiTOquwJpEBkMqHLZYkg0jmvJV/r4M5Jo4tX0=",
    "id": "{43C51B14-5BEF-4e7e-BF92-57D675A85653}",
    "meta": [
     ["Diagram_Type","Custom"],
@@ -346,11 +346,11 @@
     ["Element Metadata 1.0::ModifiedDate","2021-08-05T13:32:27Z"]],
    "parent": "{3F789D71-B8E9-4206-B7D4-B210C26C008C}",
    "sub": [
-    "UBP5twG6uBqhGENtk3YXeqVvs2H3QDFds8M7H35fpA4=",
-    "fnEsgOTBHR4D6ckqWahc/vuA3zI1uT8D2oJDNgd+5sA=",
-    "q6rz8irlVvfMY7t/oR1bFLNHrx33BhG6UdorBK1v9xo="]},
+    "RtmPuH7UAiTwdpZIKSk72sDs8T2GerP9eskjiKvdTP8=",
+    "dCKw6IMddcL+zYP6HzZRuk5so3U3NO+64vKUFCfbzV8=",
+    "16dMv+68wdInBE76b1UPjVaLdFMLCuBa+a/YRIsiVSY="]},
   {
-   "oid": "BuapMywRFTq+44x+I/lF1A4iVr1WNnuuZstNoU7pWro=",
+   "oid": "PPb0GHI11BCjvmeISuRC2siwyAtLqvSSgs04saNFTKw=",
    "id": "{69BDB0DD-F38E-4dc2-ACAF-7997DFE90372}",
    "meta": [
     ["+ET","t_object"],
@@ -394,9 +394,9 @@
    "parent": "{3F789D71-B8E9-4206-B7D4-B210C26C008C}",
    "ref": [
     ["{SysML1.4::testCase}","PrimaryStereotype",16],
-    ["{SysML1.4::testCase}","Stereotype",72]]},
+    ["{SysML1.4::testCase}","Stereotype",8]]},
   {
-   "oid": "tNZ+i0jvglCuNVIMxg0aApfIwjm4AXeenSFgYdavsos=",
+   "oid": "BbtOm5sSXzyLwVrDE0SC9T5+TKPNmv5fqZsql76PguI=",
    "id": "{a20e6818-b862-adbd-e3b9-4604ad40a22c}",
    "meta": [
     ["+ET","t_object"],
@@ -435,7 +435,7 @@
    "parent": "{a41c38ff-1a48-cbc0-4b84-5019da4fde0d}",
    "ref": [
     ["{mpms spec metadata+class}","PrimaryStereotype",16],
-    ["{mpms spec metadata+class}","Stereotype",72]],
+    ["{mpms spec metadata+class}","Stereotype",8]],
    "sub": [
     "A5CTwYk0aT3C/XzM+tX+XfYgewI4b15u4yrCQHK4+GA=",
     "CIu4Xo2HNcNSvUtckx/Lac8bgiaCbFPF+5xi/mU4kDY=",
@@ -445,13 +445,13 @@
     "g9uiw2NvyxXpHEiBiSs9wrpjVdPSTStgabMEY2sqwK8=",
     "j974hafaPQuUtyLeQD/nIPgJ1F+xDs0K/iC7+dXiy6k=",
     "kXJ4jJ+fkH/m/CLchskrY/jtJ9kPc5WWnpiXpn6LruI=",
-    "rez5tWgBnddkNGnGd74/CEv6cu4WJuC1h2IQCenhcpw=",
+    "pRX/YWR+RbgZe7or3m+a/ajkqRi9ttzaXg5i5ceNaek=",
     "uefZVuzaDGk16i3+NPCOSrtrjA7evJE2NyfHLI62BFA=",
     "xiDBpkw8PgjO57YASNwRjk633JH/EKhEx2q5fwnp7t8=",
     "2TzFk5csd6nVqMLrY2CB7BcbDTLXXIYCtqJ96nEcsI8=",
     "8dhp/xfrKehA9BOk5WAZeOT194zfifNWcKq7hUhHgoI="]},
   {
-   "oid": "Cjtv5SufpkkaN3h6Se/NyzfJ+V/HxgbEQWHt+AS0k0w=",
+   "oid": "qCgOEEpX8nUuatuXofv6t1A5FGRg7D0y7te8wtFHkl8=",
    "id": "{e4b5fd6a-4b44-7f8b-f60e-074a363fe57c}",
    "meta": [
     ["+ET","t_object"],
@@ -490,7 +490,7 @@
    "parent": "{a41c38ff-1a48-cbc0-4b84-5019da4fde0d}",
    "ref": [
     ["{mpms model dependency+class}","PrimaryStereotype",16],
-    ["{mpms model dependency+class}","Stereotype",72]],
+    ["{mpms model dependency+class}","Stereotype",8]],
    "sub": [
     "DBHVQZuuVulvmysruCb6YUK4WrMM/fCz+ndNy3dRSRQ=",
     "4FBDWUe16/e0XurmtEEhZ1d7zd426TYE+xbWh/uFKAI="]},
@@ -524,7 +524,7 @@
     ["EA Specifics 1.0::Profile::metatype",""]],
    "parent": "{6e9e9a00-7e44-5dbc-808b-3e78bf2c2a6b}"},
   {
-   "oid": "fnEsgOTBHR4D6ckqWahc/vuA3zI1uT8D2oJDNgd+5sA=",
+   "oid": "dCKw6IMddcL+zYP6HzZRuk5so3U3NO+64vKUFCfbzV8=",
    "id": "{6c9ae399-28aa-3440-bb83-5b248f4396db}",
    "meta": [
     ["+ET","t_diagramobjects"],
@@ -546,10 +546,9 @@
    "parent": "{43C51B14-5BEF-4e7e-BF92-57D675A85653}",
    "ref": [
     ["{4121D848-58F8-4274-A989-5CAE6CE76622}","Represents",889],
-    ["{43C51B14-5BEF-4e7e-BF92-57D675A85653}","DiagramIntegralFeature",32],
     ["{43C51B14-5BEF-4e7e-BF92-57D675A85653}","UpdateDiagramobjects",8]]},
   {
-   "oid": "q6rz8irlVvfMY7t/oR1bFLNHrx33BhG6UdorBK1v9xo=",
+   "oid": "16dMv+68wdInBE76b1UPjVaLdFMLCuBa+a/YRIsiVSY=",
    "id": "{76e26d1b-0e8d-db78-5f96-33f6ff4a2899}",
    "meta": [
     ["+ET","t_diagramobjects"],
@@ -572,10 +571,9 @@
    "parent": "{43C51B14-5BEF-4e7e-BF92-57D675A85653}",
    "ref": [
     ["{3F789D71-B8E9-4206-B7D4-B210C26C008C}","Represents",889],
-    ["{43C51B14-5BEF-4e7e-BF92-57D675A85653}","DiagramIntegralFeature",32],
     ["{43C51B14-5BEF-4e7e-BF92-57D675A85653}","UpdateDiagramobjects",8]]},
   {
-   "oid": "UBP5twG6uBqhGENtk3YXeqVvs2H3QDFds8M7H35fpA4=",
+   "oid": "RtmPuH7UAiTwdpZIKSk72sDs8T2GerP9eskjiKvdTP8=",
    "id": "{ff20ce61-9421-bfb7-a4cd-75f599f104da}",
    "meta": [
     ["+ET","t_diagramobjects"],
@@ -596,7 +594,6 @@
     ["EA Specifics 1.0::ObjectStyle::DUID","406D00F5"]],
    "parent": "{43C51B14-5BEF-4e7e-BF92-57D675A85653}",
    "ref": [
-    ["{43C51B14-5BEF-4e7e-BF92-57D675A85653}","DiagramIntegralFeature",32],
     ["{43C51B14-5BEF-4e7e-BF92-57D675A85653}","UpdateDiagramobjects",8],
     ["{69BDB0DD-F38E-4dc2-ACAF-7997DFE90372}","Represents",889]]},
   {
@@ -900,7 +897,7 @@
     ["EA Specifics 1.0::TypeString","String"]],
    "parent": "{a20e6818-b862-adbd-e3b9-4604ad40a22c}"},
   {
-   "oid": "rez5tWgBnddkNGnGd74/CEv6cu4WJuC1h2IQCenhcpw=",
+   "oid": "pRX/YWR+RbgZe7or3m+a/ajkqRi9ttzaXg5i5ceNaek=",
    "id": "{f23e28f4-7b7d-d6a7-8e7d-0442a865d6b9}",
    "meta": [
     ["+ET","t_attribute"],
@@ -910,7 +907,7 @@
    "prop": [
     ["+M","AggregationKind","None"],
     ["+X","+A",""],
-    ["+M","DefaultValue","{3F789D71-B8E9-4206-B7D4-B210C26C008C}:81beb11ed9a7e3c8222f25d66a8af0c1b52bfd75dc17ddc552243aaa7bef4d6f"],
+    ["+M","DefaultValue","{3F789D71-B8E9-4206-B7D4-B210C26C008C}:f789a0768fccaafb6c3e1e7d76eb079ed9c3b0dcea91396a47bc5f7fe7860e6a"],
     ["+M","+D",""],
     ["+X","IsID","false"],
     ["+M","IsNavigable","false"],
