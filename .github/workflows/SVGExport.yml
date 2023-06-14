@@ -10,7 +10,7 @@ on:
   branches:
       - develop
 env:
-  ModelName: model 
+  ModelName: pwc
   ModelExtension: eapx
   LemonTreeAutomationExecutable: .\LTA\LemonTree.Automation.exe
   SVGURL: https://nexus.lieberlieber.com/repository/svg/Training2021/
