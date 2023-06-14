@@ -36,9 +36,14 @@ jobs:
             curl "https://customers.lieberlieber.com/downloads/LemonTree/Automation/alpha/LemonTree.Automation.Windows.Zip_4.0.0-alpha0298.zip" --output LTA.zip -k
             Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
 
+
+
             $license = '${{secrets.LTALICENSE}}'
             echo "Create License File from provided info"
             $license | Out-File -FilePath lta.lic #if you deploy the license on the fly
+
+            New-Item -ItemType Directory -Path .\svg\
+
             &"${{env.LemonTreeAutomationExecutable}}" SvgExport --model "${{env.ModelName}}.${{env.ModelExtension}}"   --DiagramDirectory .\svg\
       
       - name: Publish SVG Artifacts
