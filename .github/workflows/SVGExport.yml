@@ -8,7 +8,7 @@ name: SVG Export
 on:
  push:
   branches:
-      - main
+      - develop
 env:
   ModelName: model 
   ModelExtension: eapx
