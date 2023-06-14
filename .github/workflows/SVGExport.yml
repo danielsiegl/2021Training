@@ -12,7 +12,7 @@ on:
 env:
   ModelName: model 
   ModelExtension: eapx
-  LemonTreeAutomationExecutable: .\LTA\LemonTree.Automation\LemonTree.Automation.exe
+  LemonTreeAutomationExecutable: .\LTA\LemonTree.Automation.exe
   SVGURL: https://nexus.lieberlieber.com/repository/svg/Training2021/
   
 jobs:
