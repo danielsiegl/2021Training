@@ -1,0 +1,73 @@
+# Copyright (c) LieberLieber Software GmbH
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+name: SVG Export
+
+on:
+ push:
+  branches:
+      - main
+env:
+  ModelName: model 
+  ModelExtension: eapx
+  LemonTreeAutomationExecutable: .\LTA\LemonTree.Automation\LemonTree.Automation.exe
+  SVGURL: https://nexus.lieberlieber.com/repository/svg/Training2021/
+  
+jobs:
+  SVGExport:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: [windows-latest] 
+    timeout-minutes: 15
+    steps:  
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+          fetch-depth: 0
+      
+
+      - name: SVG Export
+        run: |
+            echo "Download LemonTree.Automtion from Repo"
+            while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
+            curl "https://customers.lieberlieber.com/downloads/LemonTree/Automation/alpha/LemonTree.Automation.Windows.Zip_4.0.0-alpha0298.zip" --output LTA.zip -k
+            Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
+
+            $license = '${{secrets.LTALICENSE}}'
+            echo "Create License File from provided info"
+            $license | Out-File -FilePath lta.lic #if you deploy the license on the fly
+            &"${{env.LemonTreeAutomationExecutable}}" SvgExport --model "${{env.ModelName}}.${{env.ModelExtension}}"   --DiagramDirectory .\svg\
+      
+      - name: Publish SVG Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: SVGDiagramFiles
+          path: .\svg\*.svg
+          retention-days: 5
+      
+      - name: Upload to Nexus
+        id: upload
+        run: |
+         
+          $targetUrl = "${{env.SVGURL}}"
+          echo "Uploading SVG Diagrams to Nexus: $targetUrl"
+          $files = Get-ChildItem .\svg\*.svg
+          foreach ($file in $files) 
+          {
+            $outputFile = Split-Path $file -leaf
+            $uploadFile = $outputFile -replace '{','_' -replace '}','_'
+            Copy-Item ".\svg\$outputFile" -Destination ".\svg\$uploadFile"
+
+            echo "$outputFile ==> $uploadFile"
+            while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
+            curl "-u${{secrets.NEXUSAUTHENTICATION}}" -T ".\svg\$uploadFile" "$targetUrl/$uploadFile"
+          }
+
+           
+    
+            
+     
+    
