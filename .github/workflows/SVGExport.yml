@@ -34,7 +34,7 @@ jobs:
         run: |
             echo "Download LemonTree.Automtion from Repo"
             while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
-            curl "https://customers.lieberlieber.com/downloads/LemonTree/Automation/alpha/LemonTree.Automation.Windows.Zip_4.0.0-alpha0298.zip" --output LTA.zip -k
+            curl "https://customers.lieberlieber.com/downloads/LemonTree/Automation/alpha/LemonTree.Automation.Windows.Zip_4.0.0-alpha0326.zip" --output LTA.zip -k
             Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
 
 
